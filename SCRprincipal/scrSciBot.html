@@ -1,0 +1,185 @@
+html
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Science Bot - Neon Edition</title>
+    <script src="https://puter.com"></script>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #050505 url('https://freepik.com') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        #chat-container { 
+            width: 450px; 
+            background: rgba(10, 25, 41, 0.85); 
+            backdrop-filter: blur(8px);
+            border-radius: 15px; 
+            box-shadow: 0 0 30px rgba(45, 226, 255, 0.2); 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            height: 450px; 
+            border: 1px solid rgba(45, 226, 255, 0.3);
+        }
+
+        #messages { 
+            flex: 1; 
+            padding: 15px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px;
+            background-image: linear-gradient(rgba(13, 56, 87, 0.6), rgba(13, 56, 87, 0.6)), url('../SCRprincipal/imagens/logo3.jpeg');
+            background-size: cover;
+            background-position: center; 
+        }
+
+        .msg { padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; max-width: 85%; }
+        .user { background: #007bff; color: white; align-self: flex-end; }
+        .bot { background: #c0ff2d; color: #051a02; align-self: flex-start; font-weight: 500; box-shadow: 0 0 10px rgba(192, 255, 45, 0.3); }
+        
+        #suggestions { 
+            display: flex; 
+            gap: 8px; 
+            padding: 12px; 
+            overflow-x: auto; 
+            background: rgba(0, 0, 0, 0.3); 
+        }
+        
+        .chip { 
+            background: transparent; 
+            color: #2DE2FF; 
+            border: 1px solid #2DE2FF; 
+            padding: 5px 12px; 
+            border-radius: 15px; 
+            font-size: 11px; 
+            cursor: pointer; 
+            white-space: nowrap; 
+            transition: 0.3s;
+        }
+        .chip:hover { background: #2DE2FF; color: #000; box-shadow: 0 0 12px #2DE2FF; }
+
+        #input-area { display: flex; padding: 15px; background: rgba(13, 56, 87, 0.5); gap: 8px; }
+        
+        input { 
+            flex: 1; 
+            padding: 12px; 
+            border: 1px solid rgba(45, 226, 255, 0.5); 
+            border-radius: 8px; 
+            outline: none; 
+            background: rgba(16, 42, 67, 0.8); 
+            color: #fff; 
+        }
+
+        /* BOTÃO COM EFEITO NEON PULSANTE */
+        button { 
+            padding: 10px 20px; 
+            background: #2DE2FF; 
+            color: #0D3857; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            animation: pulse-neon 2s infinite; /* Ativa a animação */
+        }
+
+        @keyframes pulse-neon {
+            0% { box-shadow: 0 0 5px #2DE2FF, 0 0 10px #2DE2FF; }
+            50% { box-shadow: 0 0 15px #2DE2FF, 0 0 25px #c0ff2d; }
+            100% { box-shadow: 0 0 5px #2DE2FF, 0 0 10px #2DE2FF; }
+        }
+
+        button:hover { 
+            background: #c0ff2d; 
+            transform: scale(1.05); 
+            animation: none; 
+            box-shadow: 0 0 30px #c0ff2d; 
+        }
+
+        .disclaimer { 
+            font-size: 10px; 
+            color: #2DE2FF; 
+            padding: 12px; 
+            text-align: center; 
+            background: rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(45, 226, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div id="chat-container">
+    <div class="disclaimer">
+        <b>Portal Científico:</b> Células Estaminais e Terapias Avançadas. Conteúdo informativo baseado em evidências.
+    </div>
+    <div id="messages">
+        <div class="msg bot">Olá tudo bem? Posso esclarecer alguma dúvida? Sugiro os temas em baixo.</div>
+    </div>
+    
+    <div id="suggestions">
+        <div class="chip" onclick="quickReply('O que são iPSCs (Células Estaminais Pluripotentes Induzidas)?')">iPSCs</div>
+        <div class="chip" onclick="quickReply('Explica as funções das Células Estaminais Mesenquimais (MSCs)')">Mesenquimais (MSCs)</div>
+        <div class="chip" onclick="quickReply('Como funciona a diferenciação celular?')">Diferenciação</div>
+        <div class="chip" onclick="quickReply('Quais são as terapias celulares aprovadas pela EMA/FDA?')">Terapias Aprovadas</div>
+        <div class="chip" onclick="quickReply('Explica o papel dos biomateriais em terapia celular')">Biomateriais</div>
+    </div>
+
+    <div id="input-area">
+        <input type="text" id="user-input" placeholder="Pergunte sobre iPSCs, MSCs ou ensaios clínicos...">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
+</div>
+
+<script>
+    const msgContainer = document.getElementById('messages');
+
+    function quickReply(text) {
+        document.getElementById('user-input').value = text;
+        sendMessage();
+    }
+
+    async function sendMessage() {
+        const input = document.getElementById('user-input');
+        const text = input.value.trim();
+        if (!text) return;
+
+        addMessage(text, 'user');
+        input.value = '';
+
+        try {
+            const response = await puter.ai.chat(
+                `Age como um Especialista em Biologia Celular. Responde em Português.
+                 1. Analisa tecnicamente: ${text}. 
+                 2. Foca em mecanismos celulares.
+                 3. Mantém um tom científico e rigoroso.`,
+                { model: 'gpt-5-nano' }
+            );
+            addMessage(response.toString(), 'bot');
+        } catch (err) {
+            addMessage("Erro: Falha na sinapse de dados.", 'bot');
+        }
+    }
+
+    function addMessage(text, sender) {
+        const div = document.createElement('div');
+        div.className = `msg ${sender}`;
+        div.textContent = text;
+        msgContainer.appendChild(div);
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+    }
+</script>
+
+</body>
+</html>

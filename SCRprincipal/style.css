@@ -1,0 +1,641 @@
+/* css
+Configurações Gerais */
+* {
+    margin: 0.05rem;
+    padding: 0;
+    background-color: #0B0C10; /* Preto Noite */
+    color: #E0E0E0; /*Branco Suave*/
+    gap: 2%;
+
+    h1 {
+        text-shadow: 0 0 20px rgba(45, 226, 255, 0.8), 0 0 40px rgba(45, 226, 255, 0.4);
+    }
+    .yellow-text {
+        color: #FAF6DB;
+    }
+    .stem-text {
+        color: #2DE2FF;
+    }
+    .rock-text {
+        color: #EECFE5;
+    }
+    h2 {
+        color: #FAF6DB;
+        text-shadow: 0 0 20px rgba(45, 226, 255, 0.8), 0 0 40px rgba(45, 226, 255, 0.4);
+    }
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #0B0C10; /* Preto Noite */
+    color: #E0E0E0; /* Branco Suave */
+    gap: 2%;
+}
+
+* a {
+    text-decoration: none;
+}
+
+* p {
+    border: 1px;
+    text-align: center;
+}
+
+/*coverpage*/
+
+.logo {
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0 auto;
+}
+
+.cta-button {
+    padding: 15px 30px;
+    background-color: transparent;
+    color: #FF31B1;
+    border: 2px solid #FF31B1;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 32px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: 0.4s;
+    box-shadow: 0 0 15px rgba(255, 49, 177, 0.3);
+}
+.cta-button:hover {
+    background-color: #FF31B1;
+    color: white;
+    box-shadow: 0 0 30px #EECBE2;
+}
+
+@media (max-width:768px){
+    .cta-button {
+    padding: 5px 20px;
+    background-color: transparent;
+    color: #FF31B1;
+    border: 5px solid #FF31B1;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: uppercase;
+    border-radius: 15px;
+    transition: 0.4s;
+    box-shadow: 0 0 8px rgba(255, 49, 177, 0.3);
+}
+.cta-button:hover {
+    background-color: #FF31B1;
+    color: white;
+    box-shadow: 0 0 5px #EECBE2;
+}
+}
+
+/*navigation bar*/
+
+.navImage{
+    display: flex;
+    align-items: flex-start;
+}
+.barra {
+    margin-top: 1px;
+    margin-left: 2px;
+    text-align: left;
+    -webkit-text-fill-color: #2DE2FF;
+    display: block;
+    gap: 2px;
+    max-width: 150px;
+}
+
+
+
+li:hover {
+    border-color: #c0ff2d;
+    transform: translateX(15px);
+    box-shadow: -5px 0 15px #c0ff2d;
+}
+
+.Reg{
+    font-size: 7px;
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+    list-style: none;
+}
+
+.Log{
+    font-size: 7px;
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.StemCellIA {
+    font-size: 7px;
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+    
+}
+
+.musica {
+    font-size: 7px;
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+    
+}
+
+.video {
+    font-size: 7px;
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+    
+}
+
+.coordenador {
+    font-size: 7px;
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+    
+}
+
+.equipa {
+    font-size: 7px;
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+    
+}
+
+.contactos {
+    font-size: 7px;
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;    
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    text-size-adjust: inherit;
+}
+
+.main2 {
+    display: flex;
+    flex-direction: row;
+    text-size-adjust: inherit;
+}
+
+.btn {
+  display:inline-block;
+  width:100%;
+  height:auto;
+  position:relative;
+}
+.btn-neon{
+  
+  color:#fffb00;
+ 
+}
+.btn-neon{
+  float:left;
+  display:flex;
+  padding:15px 25px;
+  font-size:1em;
+  margin-left:10px;
+  text-transform:uppercase;
+  text-decoration:none;
+  background:transparent;
+  outline:none;
+  cursor:pointer;
+  border:2px solid transparent;
+  border-radius:4px;
+  transition:400ms;
+}
+.btn-neon:hover{
+  border: 2px solid;
+  box-shadow: 0 0 8px;
+}
+.btn-neon:focus{
+  color:#000;
+  border: 2px solid #fffb00;
+  background:#fffb00;
+  box-shadow: 0 0 18px #fffb00;
+}
+button { 
+            padding: 10px 20px; 
+            background: #2DE2FF; 
+            color: #0D3857; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold;
+            background-clip: text; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            animation: pulse-neon 2s infinite; /* Ativa a animação */
+        }
+
+        @keyframes pulse-neon {
+            0% { box-shadow: 0 0 5px #2DE2FF, 0 0 10px #2DE2FF; }
+            50% { box-shadow: 0 0 15px #2DE2FF, 0 0 25px #c0ff2d; }
+            100% { box-shadow: 0 0 5px #2DE2FF, 0 0 10px #2DE2FF; }
+        }
+
+        button:hover { 
+            background: #c0ff2d;
+            background-clip: text;  
+            transform: scale(1.05); 
+            animation: none; 
+            box-shadow: 0 0 30px #c0ff2d; 
+        }
+
+/* inframe video link youtube unlisted*/
+.video-responsivo {
+  width: 100%;           /* Ocupa toda a largura disponível */
+  height: auto;          /* Altura calculada automaticamente */
+  aspect-ratio: 16 / 9;  /* Mantém a proporção padrão do YouTube */
+}
+
+
+/* css equipa*/
+.conteudo-flex {
+    display: flex;          /* Coloca os itens lado a lado */
+    align-items: flex-start; /* Alinha o texto pelo topo da imagem */
+    gap: 20px;              /* Dá um espaço entre a imagem e o texto */
+    margin-bottom: 20px;
+}
+
+/* Ajuste para garantir que o texto não fique "esmagado" */
+.conteudo-flex p {
+    margin-top: 0;          /* Remove espaço extra no topo do texto */
+    flex: 1;                /* Faz o texto ocupar o resto do espaço */
+}
+
+/* Ajuste opcional para telemóveis (coloca um por baixo do outro) */
+@media (max-width: 768px) {
+    .conteudo-flex {
+        flex-direction: column;
+    }
+    .conteudo-flex img {
+        width: 100%;        /* Imagem ocupa a largura toda no telemóvel */
+    }
+}
+
+
+
+/* Extra small devices (phones, 480px and down) */
+@media only screen and (max-width: 480px)
+{
+    .Reg {
+        font-size: 0.7rem;
+    }
+    .Log {
+        font-size: 0.7rem;
+    }
+    .StemCellIA {
+        font-size: 0.7rem;
+    }
+    .musica {
+        font-size: 0.7rem;
+    }
+    .video {
+        font-size: 0.7rem;
+    }
+    .coordenador {
+        font-size: 0.7rem;
+    }
+    .equipa {
+        font-size: 0.7rem;
+    }
+    .contactos {
+        font-size: 0.7rem;
+    }
+
+    h1 {
+        font-size: 1rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    h2 {
+        font-size: 0.9rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    p {
+        font-size: 0.8rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    a {
+        font-size: 0.7rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+    .btn-neon {
+        font-size: 0.7rem;
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 481px and up) */
+@media only screen and (min-width: 481px) {
+    .Reg {
+        font-size: 0.8rem;
+    }
+    .Log {
+        font-size: 0.8rem;
+    }
+    .StemCellIA {
+        font-size: 0.8rem;
+    }
+    .musica {
+        font-size: 0.8rem;
+    }
+    .video {
+        font-size: 0.8rem;
+    }
+    .coordenador {
+        font-size: 0.8rem;
+    }
+    .equipa {
+        font-size: 0.8rem;
+    }
+    .contactos {
+        font-size: 0.8rem;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    h2 {
+        font-size: 1rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    p {
+        font-size: 0.9rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    a {
+        font-size: 0.8rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+    .btn-neon {
+        font-size: 0.8rem;
+    }
+}
+
+/* Medium devices (landscape tablets, 1025px and up) */
+@media only screen and (min-width: 1025px) {
+    .Reg {
+        font-size: 1rem;
+    }
+    .Log {
+        font-size: 1rem;
+    }
+    .StemCellIA {
+        font-size: 1rem;
+    }
+    .musica {
+        font-size: 1rem;
+    }
+    .video {
+        font-size: 1rem;
+    }
+    .coordenador {
+        font-size: 1rem;
+    }
+    .equipa {
+        font-size: 1rem;
+    }
+    .contactos {
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+
+    p {
+        font-size: 1rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    a {
+        font-size: 1rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+    .btn-neon {
+        font-size: 1rem;
+    }
+}
+
+/* Large devices (laptops/desktops, 1441px and up) */
+@media only screen and (min-width: 1441px) {
+    .Reg {
+        font-size: 1.2rem;
+    }
+    .Log {
+        font-size: 1.2rem;
+    }
+    .StemCellIA {
+        font-size: 1.2rem;
+    }
+    .musica {
+        font-size: 1.2rem;
+    }
+    .video {
+        font-size: 1.2rem;
+    }
+    .coordenador {
+        font-size: 1.2rem;
+    }
+    .equipa {
+        font-size: 1.2rem;
+    }
+    .contactos {
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    
+    p {
+        font-size: 1.2rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    a {
+        font-size: 1.2rem;
+        font-weight: 1000;
+        font-display: auto;
+        text-align: justify;
+        text-justify: auto;
+    }
+    .btn-neon {
+        font-size: 1.2rem;
+    }
+}
+
+.carousel-container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.carousel-track {
+  display: flex;
+  width: 600%; /* 5 images + 1 clone */
+  /* 20 seconds total: (3s pause + 1s slide) x 5 images */
+  animation: scroll 20s infinite ease-in-out;
+}
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+.slide {
+  width: 100%;
+}
+
+.slide img {
+  width: 100%;
+  display: block;
+}
+
+/* 
+   Total duration: 20s. 
+   Each 5% represents 1 second.
+*/
+@keyframes scroll {
+  0%   { transform: translateX(0); }         /* Image 1 starts */
+  15%  { transform: translateX(0); }         /* Image 1 stays (3s) */
+  20%  { transform: translateX(-16.66%); }   /* Slide to Image 2 (1s) */
+  35%  { transform: translateX(-16.66%); }   /* Image 2 stays (3s) */
+  40%  { transform: translateX(-33.33%); }   /* Slide to Image 3 (1s) */
+  55%  { transform: translateX(-33.33%); }   /* Image 3 stays (3s) */
+  60%  { transform: translateX(-50%); }      /* Slide to Image 4 (1s) */
+  75%  { transform: translateX(-50%); }      /* Image 4 stays (3s) */
+  80%  { transform: translateX(-66.66%); }   /* Slide to Image 5 (1s) */
+  95%  { transform: translateX(-66.66%); }   /* Image 5 stays (3s) */
+  100% { transform: translateX(-83.33%); }   /* Slide to Clone/Restart (1s) */
+}

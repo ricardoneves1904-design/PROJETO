@@ -1,0 +1,504 @@
+css
+/* Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+
+}
+
+body {
+    width: 480px;
+    height: 1000px;
+    display: flex;
+    flex-direction: row;
+    background-color: #0B0C10; /* Preto Noite */
+    color: #E0E0E0; /* Branco Suave */
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+}
+
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    color: #2DE2FF;
+    line-height: 1.1;
+    text-shadow: 0 0 20px rgba(45, 226, 255, 0.8), 0 0 40px rgba(45, 226, 255, 0.4);
+}
+
+.pink-text {
+    color: #FF31B1; /* Rosa Magenta */
+    text-shadow: 0 0 20px rgba(255, 49, 177, 0.8);
+    font-style: italic;
+}
+
+p {
+    /* margin: 20px 0 40px; */
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+
+.playlist-section {
+    /* padding: 80px 10%; */
+    background-color: #0B0C10;
+    /* text-align: justify; */
+}
+
+.playlist-section h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    /* margin-bottom: 40px; */
+    color: #E0E0E0;
+}
+
+.yellow-text {
+    color: #F9F871;
+    text-shadow: 0 0 10px #F9F871;
+}
+
+.playlist-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.track-card {
+    background: #1A1B41;
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.track-card:hover {
+    border-color: #2DE2FF;
+    transform: translateX(10px);
+    box-shadow: -5px 0 15px rgba(45, 226, 255, 0.3);
+}
+
+.track-card.active {
+    border-left: 5px solid #FF31B1;
+    background: linear-gradient(90deg, #1A1B41 0%, #0B0C10 100%);
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+}
+
+.track-number {
+    font-family: 'Orbitron', sans-serif;
+    color: #2DE2FF;
+    font-size: 1rem;
+}
+
+.track-info h3 {
+    font-size: 1rem;
+    /* margin-bottom: 4px; */
+}
+
+.track-info p {
+    font-size: 0.7rem;
+    margin: 0;
+    color: #AAA;
+}
+
+.track-card:hover .play-icon {
+    text-shadow: 0 0 10px #F9F871;
+    transform: scale(1.2);
+}
+.playlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto 15px;
+}
+
+.play-all-btn {
+    background-color: #FF31B1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    /* Início da Animação de Pulsação */
+    animation: neon-pulse 2s infinite;
+    box-shadow: 0 0 15px rgba(255, 49, 177, 0.6);
+}
+
+.play-all-btn:hover {
+    background-color: #2DE2FF; /* Muda para Azul ao passar o rato */
+    box-shadow: 0 0 25px rgba(45, 226, 255, 0.8);
+    transform: scale(1.05);
+}
+
+.play-all-btn .icon {
+    font-size: 1rem;
+}
+
+
+.btn {
+  display:inline-block;
+  width:100%;
+  height:auto;
+  position:relative;
+}
+.btn-neon{
+  
+  color:#fffb00;
+ 
+}
+.btn-neon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 25px;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: transparent;
+  color: #fffb00; /* Neon yellow to match your theme */
+  border: 2px solid #fffb00;
+  border-radius: 50px;
+  transition: 400ms;
+  cursor: pointer;
+  animation: neon-pulse 2s infinite;
+}
+
+.btn-neon:hover {
+  background: #fffb00;
+  color: #000;
+  box-shadow: 0 0 20px #fffb00;
+}
+
+.btn-neon:focus{
+  color:#000;
+  border: 2px solid #fffb00;
+  background:#fffb00;
+  box-shadow: 0 0 18px #fffb00;
+}
+
+/* Keyframes para o efeito de pulsação */
+@keyframes neon-pulse {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 49, 177, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(255, 49, 177, 0.8), 0 0 40px rgba(255, 49, 177, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 49, 177, 0.4);
+    }
+}
+
+/* Ajuste rápido para o título na versão com botão */
+.playlist-section h2 {
+    margin-bottom: 0;
+}
+
+
+
+.collapsible {
+  background-color: #0B0C10;
+  color: #FF31B1;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1rem;
+}
+
+
+.collapsible:hover {
+  background-color: #F9F871;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #0B0C10;
+}
+
+/* Contentor dos botões no topo da playlist */
+.playlist-header .controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 15px;
+}
+
+/* Estilo comum para os botões */
+.play-all-btn, .shuffle-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px; /* Botões arredondados */
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Botão Play All (Destaque) */
+.play-all-btn {
+    background-color: #ffcc00; /* Amarelo condizente com o teu "Mix" */
+    color: #000;
+}
+
+.play-all-btn:hover {
+    background-color: #e6b800;
+    transform: scale(1.05);
+}
+
+/* Botão Aleatório */
+.shuffle-btn {
+    background-color: #333;
+    color: #fff;
+    border: 2px solid transparent;
+}
+
+.shuffle-btn:hover {
+    background-color: #444;
+    border-color: #ffcc00;
+}
+
+/* Estado Ativado do Aleatório */
+.shuffle-btn.active-mode {
+    background-color: #222;
+    border-color: #00ff88; /* Verde neon para indicar que está ligado */
+    color: #00ff88;
+}
+
+.shuffle-btn span {
+    margin-left: 8px;
+    font-weight: normal;
+    opacity: 0.8;
+}
+
+/* Pequeno ajuste para ícones */
+.icon {
+    margin-right: 8px;
+    font-size: 18px;
+}
+.shuffle-btn {
+    background-color: transparent;
+    color: #2DE2FF; /* Azul ciano das tuas bordas */
+    border: 1px solid #2DE2FF;
+}
+
+.shuffle-btn.active-mode {
+    background-color: #2DE2FF;
+    color: #1A1B41; /* Inverte as cores quando ativado */
+}
+/* Classe aplicada à música que está a tocar */
+.track-card.playing {
+    background: rgba(45, 226, 255, 0.3) !important; /* Mais brilhante */
+    border-color: #2DE2FF !important;
+    box-shadow: 0 0 10px rgba(45, 226, 255, 0.4);
+    transform: scale(1.02);
+}
+
+/* Pequeno ícone ou animação opcional no número da faixa */
+.track-card.playing .track-number {
+    color: #2DE2FF;
+    font-weight: bold;
+}
+
+/* Small devices (portrait tablets and large phones, 481px and up) */
+@media only screen and (max-width: 480px) {
+    pre {
+        font-size: 0.8rem;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    h2 {
+        font-size: 0.8rem;
+    }
+
+    h3 {
+        font-size: 0.7rem;
+    }
+
+    audio {
+        width: 270px;
+        height: 35px;
+        font-size: 0.2rem;
+    }
+    .shuffle-icon {
+        font-size: 1rem; /* Slightly smaller on mobile to fit the button */
+    }
+
+    /* --- NOVOS AJUSTES PARA OS BOTÕES --- */
+    .playlist-header {
+        display: flex;
+        flex-direction: row; /*Botões ao lado um do outro */
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .controls {
+        display: flex;
+        flex-direction: row; /*Botões um por cima do outro */
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .play-all-btn, .shuffle-btn {
+        padding: 8px 15px;
+        font-size: 0.6rem; /* Ajustado para condizer com o teu h2/collapsible */
+        width: 100%;       /*Ocupam a largura total no telemóvel*/
+        justify-content: center;
+    }
+
+    .icon {
+        font-size: 1rem;
+    }
+    .shuffle-icon {
+    font-size: 1rem; /* Increase this value to make it bigger */
+    vertical-align: middle;
+    margin-right: 5px;
+    display: inline-block;
+    }
+
+
+    /* The rotation animation */
+    @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+    }
+
+    Class to be applied when shuffle is ON */
+    .shuffle-btn.active-mode .shuffle-icon {
+    display: inline-block; /* Required for transform to work */
+    animation: spin 3s linear infinite; /*Rotates every 3 seconds */
+    color: #00ff88; /*Optional: change color to match your active state */
+    }
+
+
+
+
+
+    /* Pulse animation for the Play All button */
+    @keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 204, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
+    }
+
+    /* Class to trigger when the playlist is active */
+    .play-all-btn.is-playing {
+    animation: pulse-glow 2s infinite;
+    background-color: #ffdb4d; /* Slightly lighter yellow to show it's active */
+    }
+
+    /* Optional: Make the ▶ icon vibrate slightly */
+    @keyframes vibrate {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(1px); }
+    75% { transform: translateX(-1px); }
+    100% { transform: translateX(0); }
+    }
+
+    .play-all-btn.is-playing .icon {
+    display: inline-block;
+    animation: vibrate 0.3s linear infinite;
+    }
+
+    /* ------------------------------------ */
+
+    .playlist-section {
+        padding: 0;
+        background-color: #0B0C10;
+        text-align: left;
+    }
+
+    .playlist-section h2 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.8rem;
+        color: #E0E0E0;
+    }
+
+    .playlist-container {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .track-card {
+        background: #1A1B41;
+        border: 1px solid rgba(45, 226, 255, 0.2);
+        padding: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 8px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .track-info h3 {
+        font-size: 0.8rem;
+    }
+
+    .track-info p {
+        font-size: 0.7rem;
+        margin: 0;
+        color: #AAA;
+    }
+
+    .track-number {
+        font-size: 0.7rem;
+    }
+
+    .collapsible {
+        padding: 12px;
+        width: 100%;
+        font-size: 0.7rem;
+    }
+    .btn-neon {
+        display: flex;       /*Takes up space properly */
+        width: fit-content;  /* Fits the text */
+        font-size: 0.8rem;
+        padding: 8px 15px;
+        float: none;         /* Disables the float that breaks mobile */
+    }
+}
+
+
+
+
+
+
+

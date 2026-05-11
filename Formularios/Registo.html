@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrocinador</title>
+    <link rel="stylesheet" href="formulario.css">
+
+</head>
+
+    <header>
+<h1>Dados para Registo</h1>
+     </header>
+
+<body>
+    
+    <br>
+    
+
+<form action="" class="Form">
+
+    <label for="Nome">Nome Completo</label>
+<br>
+    <input type="text" id="Nome" name="Nome" placeholder="Digite o seu nome" required minlength="2" maxlength="40" size="40">
+   
+<br>
+<br>
+
+
+    <label for="id_email">email</label>
+    <br>
+    <input type="email" 
+            id="id_email" 
+            name="var_email" 
+            placeholder="Digite o seu email" 
+            required
+            size="30"
+            >
+<br>
+<br>
+<label for="id_username">username</label>
+    <br>
+    <input type="username" 
+            id="id_username" 
+            name="var_username" 
+            placeholder="escolha o username" 
+            required
+            size="30"
+            >
+<br> 
+<br>          
+    <label for="Password">Password</label>
+    <br>
+    <input type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Digite a sua password" 
+            required
+            minlength="8"
+            >
+
+<br>
+<br>
+
+    <label for="dataNascimento">Data de Nascimento</label>
+    <br>
+    <input type="date"
+            name="data_Nascimento"
+            id="dataNascimento"
+            min="1950-12-31">
+ 
+<br>
+<br>
+  
+    <label for="pais">País</label>
+    <br>
+    <select name="pais" id="pais" required>
+        <!-- Select - lista vertical com opções-->
+        <option value="" disabled selected>Selecione um país</option>
+        <!-- option é o elemento da lista -->
+        <!-- value - valor enviado ao servidor -->
+        <!-- disabled - opção não disponível para envio -->
+        <!-- selected - valor selecionado por defeito -->
+        <option value="pt">Portugal</option>
+        <option value="es">Espanha</option>
+        <option value="br">Brasil</option>
+        <option value="outro">Outro</option>
+    </select>
+
+<br>
+<br>
+
+
+    <!-- Label principal -->
+    <label>Género</label>
+    <br>
+    <!-- Input antes do label das opções-->
+    <!-- Só pode ter um valor enviado-->
+    <!-- Garantir que todas as opções estão sobre o mesmo valor do atributo "name"-->
+    <input type="radio" id="masculino" name="genero" value="masculino">
+    <label for="masculino" style="color: #DDEFFA;">Masculino</label>
+    <input type="radio" id="feminino" name="genero" value="feminino">
+    <label for="feminino" style="color: #EECCE3;">Feminino</label>
+    <input type="radio" id="outro" name="genero" value="outro">
+    <label for="outro" style="color: #ECC9E1;">Outro</label>
+ 
+<br>
+<br>
+
+</body>
+
+<button
+    <a href="Login.html">Enviar</a>
+</button>
+
+</form>
+
+
+</body>
+</html>
