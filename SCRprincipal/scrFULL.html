@@ -144,13 +144,25 @@
     </button>
 
     <!-- Contentor colapsável (escondido por padrão) -->
-    <div id="wrapper-comentarios" style="display: none; width: 100%; min-height: 250px;">
+    <div id="wrapper-comentarios" style="display: none; width: 100%; margin-top: 15px;">
+        <!-- Estilo extra para forçar a altura do widget e do iframe do Cusdis -->
+        <style>
+            #cusdis_thread {
+                min-height: 550px; /* Aumenta o tamanho vertical mínimo aqui */
+                width: 100%;
+            }
+            #cusdis_thread iframe {
+                min-height: 550px !important; /* Força o iframe interno a acompanhar a altura */
+                width: 100% !important;
+            }
+        </style>
+
         <!-- Janela de Comentários do Cusdis -->
         <div id="cusdis_thread"
           data-host="https://cusdis.com"
           data-app-id="e696a73f-4e31-48f2-bf07-40465a2c94e5"
           data-page-id="home_show"
-          data-page-url="https://stemcellsrock.netlify.app/"
+          data-page-url="http://localhost"
           data-page-title="O Meu Show"
           data-theme="dark">
         </div>
