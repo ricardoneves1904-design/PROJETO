@@ -163,10 +163,11 @@ html
                 `Age como um Especialista em Biologia Celular. Responde em Português.
                  1. Analisa tecnicamente: ${text}. 
                  2. Foca em mecanismos celulares.
-                 3. Mantém um tom científico e rigoroso.`,
+                 3. Mantém um tom científico e rigoroso.
+                 4. Responde em texto corrido resumido a 150 palavras.`,
                 { model: 'gpt-5-nano' }
             );
-            console.log(response)
+    
             
             addMessage(response.toString(), 'bot');
         } catch (err) {
