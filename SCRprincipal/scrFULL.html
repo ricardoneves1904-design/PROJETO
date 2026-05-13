@@ -6,11 +6,7 @@
     <title>scrFULL</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- Identificação da aplicação que criei no Facebook Developers -->
-<meta property="fb:app_id" content="COLOQUE_AQUI_O_SEU_APP_ID" />
 
-<!-- Vínculo de Moderação: Permite-lhe gerir os comentários -->
-    <meta property="fb:app_id" content="2524744484625784" />
 </head>
 <header>
     <img src="../SCRprincipal/imagens/banner.jpeg" alt="imagem do banner" width="100%" height="auto">
@@ -139,26 +135,49 @@
 </section>
 <br>
 <br>
-<!-- SDK do Facebook: Ativa os recursos sociais na página -->
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" 
-        src="facebook.net">
+<section id="comentarios" style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: sans-serif; color: #fff;">
+    <h2>O que achou do show?</h2>
+    
+    <!-- 1. Janela de Comentários do Cusdis -->
+    <!-- LEMBRETE: Substitua 'O_SEU_SITE' pelo nome real do seu site no Netlify -->
+    <div id="cusdis_thread"
+      data-host="https://cusdis.com"
+      data-app-id="e696a73f-4e31-48f2-bf07-40465a2c94e5"
+      data-page-id="home_show"
+      data-page-url="https://stemcellsrock.netlify.app"
+      data-page-title="O Meu Show">
+    </div>
+    
+    <!-- 2. Tradução dos textos da caixa para Português -->
+    <script>
+        window.CUSDIS_LOCALE = {
+            "powered_by": "Comentários por",
+            "post_comment": "Enviar comentário",
+            "placeholder": "Escreva aqui o seu comentário sobre o show...",
+            "name": "O seu nome",
+            "email": "E-mail (opcional)",
+            "submit": "Publicar"
+        };
     </script>
-
-    <!-- Conteúdo do Website -->
-    <main>
-        <section id="comentarios" style="max-width: 800px; margin: 0 auto; padding: 20px;">
-            <h2>O que achou do show?</h2>
-            
-            <!-- Caixa de Comentários do Facebook -->
-            <!-- SUBSTITUA pelo link final que o Netlify lhe vai dar (ex: netlify.app) -->
-            <div class="fb-comments" 
-                 data-href="https://stemcellsrock.netlify.app" 
-                 data-width="100%" 
-                 data-numposts="5">
-            </div>
-        </section>
-    </main>
+    
+    <!-- 3. Script de Ativação Oficial do Cusdis (Link Correto) -->
+    <script async defer src="cusdis.com"></script>
+    
+    <!-- 4. Código que força o Modo Escuro assim que a página carrega -->
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var iframe = document.querySelector('#cusdis_thread iframe');
+                if (iframe) {
+                    iframe.contentWindow.postMessage(JSON.stringify({
+                        type: 'setTheme',
+                        theme: 'dark'
+                    }), '*');
+                }
+            }, 500); // Aguarda meio segundo para garantir que o iframe carregou
+        });
+    </script>
+</section>
     <br>
 <br>
 
