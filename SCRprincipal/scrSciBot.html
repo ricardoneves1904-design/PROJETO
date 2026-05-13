@@ -6,117 +6,132 @@ html
     <title>Science Bot - Neon Edition</title>
     <script src="https://js.puter.com/v2/"></script>
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: #050505 url('https://freepik.com') no-repeat center center fixed;
-            background-size: cover;
-        }
+    body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #050505 url('https://freepik.com') no-repeat center center fixed;
+        background-size: cover;
+    }
 
-        #chat-container { 
-            width: 450px; 
-            background: rgba(10, 25, 41, 0.85); 
-            backdrop-filter: blur(8px);
-            border-radius: 15px; 
-            box-shadow: 0 0 30px rgba(45, 226, 255, 0.2); 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            height: 450px; 
-            border: 1px solid rgba(45, 226, 255, 0.3);
-        }
+    #chat-container { 
+        width: 450px; 
+        background: rgba(10, 25, 41, 0.85); 
+        backdrop-filter: blur(8px);
+        border-radius: 15px; 
+        box-shadow: 0 0 30px rgba(45, 226, 255, 0.2); 
+        overflow: hidden; 
+        display: flex; 
+        flex-direction: column; 
+        height: 450px; 
+        border: 1px solid rgba(45, 226, 255, 0.3);
+    }
 
-        #messages { 
-            flex: 1; 
-            padding: 15px; 
-            overflow-y: auto; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px;
-            background-image: linear-gradient(rgba(13, 56, 87, 0.6), rgba(13, 56, 87, 0.6)), url('../SCRprincipal/imagens/logo3.jpeg');
-            background-size: cover;
-            background-position: center; 
-        }
+    #messages { 
+        flex: 1; 
+        padding: 15px; 
+        overflow-y: auto; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 12px;
+        background-image: linear-gradient(rgba(13, 56, 87, 0.6), rgba(13, 56, 87, 0.6)), url('../SCRprincipal/imagens/logo3.jpeg');
+        background-size: cover;
+        background-position: center; 
+    }
 
-        .msg { padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; max-width: 85%; }
-        .user { background: #007bff; color: white; align-self: flex-end; }
-        .bot { background: #c0ff2d; color: #051a02; align-self: flex-start; font-weight: 500; box-shadow: 0 0 10px rgba(192, 255, 45, 0.3); }
-        
-        #suggestions { 
-            display: flex; 
-            gap: 8px; 
-            padding: 12px; 
-            overflow-x: auto; 
-            background: rgba(0, 0, 0, 0.3); 
-        }
-        
-        .chip { 
-            background: transparent; 
-            color: #2DE2FF; 
-            border: 1px solid #2DE2FF; 
-            padding: 5px 12px; 
-            border-radius: 15px; 
-            font-size: 11px; 
-            cursor: pointer; 
-            white-space: nowrap; 
-            transition: 0.3s;
-        }
-        .chip:hover { background: #2DE2FF; color: #000; box-shadow: 0 0 12px #2DE2FF; }
+    .msg { padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; max-width: 85%; }
+    .user { background: #007bff; color: white; align-self: flex-end; }
+    .bot { background: #c0ff2d; color: #051a02; align-self: flex-start; font-weight: 500; box-shadow: 0 0 10px rgba(192, 255, 45, 0.3); }
+    
+    /* ADIÇÃO: Indicador de Análise Científica com Estilo Neon */
+    .typing {
+        background: rgba(192, 255, 45, 0.15) !important;
+        color: #c0ff2d !important;
+        border: 1px dashed #c0ff2d;
+        font-style: italic;
+        box-shadow: 0 0 15px rgba(192, 255, 45, 0.2);
+        animation: pulse-analise 1.5s infinite ease-in-out;
+    }
 
-        #input-area { display: flex; padding: 15px; background: rgba(13, 56, 87, 0.5); gap: 8px; }
-        
-        input { 
-            flex: 1; 
-            padding: 12px; 
-            border: 1px solid rgba(45, 226, 255, 0.5); 
-            border-radius: 8px; 
-            outline: none; 
-            background: rgba(16, 42, 67, 0.8); 
-            color: #fff; 
-        }
+    @keyframes pulse-analise {
+        0% { opacity: 0.4; box-shadow: 0 0 5px rgba(192, 255, 45, 0.1); }
+        50% { opacity: 1; box-shadow: 0 0 20px rgba(192, 255, 45, 0.4); }
+        100% { opacity: 0.4; box-shadow: 0 0 5px rgba(192, 255, 45, 0.1); }
+    }
 
-        /* BOTÃO COM EFEITO NEON PULSANTE */
-        button { 
-            padding: 10px 20px; 
-            background: #2DE2FF; 
-            color: #0D3857; 
-            border: none; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-            animation: pulse-neon 2s infinite; /* Ativa a animação */
-        }
+    #suggestions { 
+        display: flex; 
+        gap: 8px; 
+        padding: 12px; 
+        overflow-x: auto; 
+        background: rgba(0, 0, 0, 0.3); 
+    }
+    
+    .chip { 
+        background: transparent; 
+        color: #2DE2FF; 
+        border: 1px solid #2DE2FF; 
+        padding: 5px 12px; 
+        border-radius: 15px; 
+        font-size: 11px; 
+        cursor: pointer; 
+        white-space: nowrap; 
+        transition: 0.3s;
+    }
+    .chip:hover { background: #2DE2FF; color: #000; box-shadow: 0 0 12px #2DE2FF; }
 
-        @keyframes pulse-neon {
-            0% { box-shadow: 0 0 5px #2DE2FF, 0 0 10px #2DE2FF; }
-            50% { box-shadow: 0 0 15px #2DE2FF, 0 0 25px #c0ff2d; }
-            100% { box-shadow: 0 0 5px #2DE2FF, 0 0 10px #2DE2FF; }
-        }
+    #input-area { display: flex; padding: 15px; background: rgba(13, 56, 87, 0.5); gap: 8px; }
+    
+    input { 
+        flex: 1; 
+        padding: 12px; 
+        border: 1px solid rgba(45, 226, 255, 0.5); 
+        border-radius: 8px; 
+        outline: none; 
+        background: rgba(16, 42, 67, 0.8); 
+        color: #fff; 
+    }
 
-        button:hover { 
-            background: #c0ff2d; 
-            transform: scale(1.05); 
-            animation: none; 
-            box-shadow: 0 0 30px #c0ff2d; 
-        }
+    button { 
+        padding: 10px 20px; 
+        background: #2DE2FF; 
+        color: #0D3857; 
+        border: none; 
+        border-radius: 8px; 
+        cursor: pointer; 
+        font-weight: bold; 
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        animation: pulse-neon 2s infinite; 
+    }
 
-        .disclaimer { 
-            font-size: 10px; 
-            color: #2DE2FF; 
-            padding: 12px; 
-            text-align: center; 
-            background: rgba(0, 0, 0, 0.5);
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(45, 226, 255, 0.2);
-        }
-    </style>
+    @keyframes pulse-neon {
+        0% { box-shadow: 0 0 5px #2DE2FF, 0 0 10px #2DE2FF; }
+        50% { box-shadow: 0 0 15px #2DE2FF, 0 0 25px #c0ff2d; }
+        100% { box-shadow: 0 0 5px #2DE2FF, 0 0 10px #2DE2FF; }
+    }
+
+    button:hover { 
+        background: #c0ff2d; 
+        transform: scale(1.05); 
+        animation: none; 
+        box-shadow: 0 0 30px #c0ff2d; 
+    }
+
+    .disclaimer { 
+        font-size: 10px; 
+        color: #2DE2FF; 
+        padding: 12px; 
+        text-align: center; 
+        background: rgba(0, 0, 0, 0.5);
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(45, 226, 255, 0.2);
+    }
+</style>
 </head>
 <body>
 
@@ -158,19 +173,25 @@ html
         addMessage(text, 'user');
         input.value = '';
 
+        // Cria o indicador de espera visual
+        const typingIndicator = addTypingIndicator();
+
         try {
             const response = await puter.ai.chat(
                 `Age como um Especialista em Biologia Celular. Responde em Português.
                  1. Analisa tecnicamente: ${text}. 
                  2. Foca em mecanismos celulares.
                  3. Mantém um tom científico e rigoroso.
-                 4. Responde em texto corrido resumido a 150 palavras.`,
+                 4. Responde in texto corrido resumido a 150 palavras.`,
                 { model: 'gpt-5-nano' }
             );
     
-            
+            // Remove o indicador antes de mostrar a resposta
+            typingIndicator.remove();
             addMessage(response.toString(), 'bot');
         } catch (err) {
+            // Remove o indicador em caso de erro
+            typingIndicator.remove();
             addMessage("Erro: Falha na sinapse de dados.", 'bot');
         }
     }
@@ -182,7 +203,15 @@ html
         msgContainer.appendChild(div);
         msgContainer.scrollTop = msgContainer.scrollHeight;
     }
-</script>
 
+    function addTypingIndicator() {
+        const div = document.createElement('div');
+        div.className = 'msg bot typing';
+        div.textContent = '🔬 À espera da resposta biológica...';
+        msgContainer.appendChild(div);
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+        return div;
+    }
+</script>
 </body>
 </html>
