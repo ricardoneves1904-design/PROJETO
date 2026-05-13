@@ -138,17 +138,25 @@
 <section id="comentarios" style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: sans-serif; color: #ffffff;">
     <h2>O que achou do show?</h2>
     
-    <!-- Janela de Comentários do Cusdis com Modo Escuro Nativo Ativado -->
-    <div id="cusdis_thread"
-      data-host="https://cusdis.com"
-      data-app-id="e696a73f-4e31-48f2-bf07-40465a2c94e5"
-      data-page-id="home_show"
-      data-page-url="https://stemcellsrock.netlify.app"
-      data-page-title="O Meu Show"
-      data-theme="dark">
+    <!-- Botão para abrir/fechar os comentários -->
+    <button id="btn-comentarios" style="background-color: #0070f3; color: white; border: none; padding: 10px 20px; font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-bottom: 20px; transition: background 0.2s;">
+        Deixar um comentário
+    </button>
+
+    <!-- Contentor colapsável (escondido por padrão) -->
+    <div id="wrapper-comentarios" style="display: none; width: 100%; min-height: 400px;">
+        <!-- Janela de Comentários do Cusdis -->
+        <div id="cusdis_thread"
+          data-host="https://cusdis.com"
+          data-app-id="e696a73f-4e31-48f2-bf07-40465a2c94e5"
+          data-page-id="home_show"
+          data-page-url="netlify.app"
+          data-page-title="O Meu Show"
+          data-theme="dark">
+        </div>
     </div>
     
-    <!-- Tradução dos textos internos para Português -->
+    <!-- Configurações e Script do Cusdis -->
     <script>
         window.CUSDIS_LOCALE = {
             "powered_by": "Comentários por",
@@ -158,11 +166,26 @@
             "email": "E-mail (opcional)",
             "submit": "Publicar"
         };
+
+        // Lógica para abrir e fechar a janela
+        const btn = document.getElementById('btn-comentarios');
+        const wrapper = document.getElementById('wrapper-comentarios');
+
+        btn.addEventListener('click', () => {
+            if (wrapper.style.display === 'none') {
+                wrapper.style.display = 'block';
+                btn.innerText = 'Fechar comentários';
+                btn.style.backgroundColor = '#333333'; // Muda a cor quando aberto
+            } else {
+                wrapper.style.display = 'none';
+                btn.innerText = 'Deixar um comentário';
+                btn.style.backgroundColor = '#0070f3'; // Restaura a cor original
+            }
+        });
     </script>
-    
-    <!-- Link Oficial e Correto para Ativar o Cusdis -->
-    <script async defer src="https://cusdis.com"></script>
+    <script async defer src="cusdis.com"></script>
 </section>
+
     <br>
 <br>
 
