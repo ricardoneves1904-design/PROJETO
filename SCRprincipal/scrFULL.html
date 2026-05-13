@@ -9,8 +9,8 @@
     <!-- Identificação da aplicação que criei no Facebook Developers -->
 <meta property="fb:app_id" content="COLOQUE_AQUI_O_SEU_APP_ID" />
 
-<!-- Identificação da página do Facebook (ajuda no SEO e moderação) -->
-<meta property="fb:admins" content="O_SEU_ID_DE_UTILIZADOR_FACEBOOK"/>
+<!-- Vínculo de Moderação: Permite-lhe gerir os comentários -->
+    <meta property="fb:app_id" content="2524744484625784" />
 </head>
 <header>
     <img src="../SCRprincipal/imagens/banner.jpeg" alt="imagem do banner" width="100%" height="auto">
@@ -139,20 +139,27 @@
 </section>
 <br>
 <br>
-<section id="comentarios">
-    <h2>O que achou do show?</h2>
-    <!-- colocar aqui uma caixa de mensagens ou comentários vindos do facebook -->
-    <!-- O Facebook usa o URL para saber quais comentários mostrar nesta página específica -->
-     <!-- Se escolher o GitHub Pages, o URL final seguirá este padrão:
-https://[seu-utilizador].github.io/[nome-do-repositorio]/ -->
+<!-- SDK do Facebook: Ativa os recursos sociais na página -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" 
+        src="facebook.net">
+    </script>
 
-    <div class="fb-comments" 
-         data-href="https://github.io" 
-         data-width="100%" 
-         data-numposts="5">
-    </div>
-</section>
-<br>
+    <!-- Conteúdo do Website -->
+    <main>
+        <section id="comentarios" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+            <h2>O que achou do show?</h2>
+            
+            <!-- Caixa de Comentários do Facebook -->
+            <!-- SUBSTITUA pelo link final que o Netlify lhe vai dar (ex: netlify.app) -->
+            <div class="fb-comments" 
+                 data-href="https://stemcellsrock.netlify.app" 
+                 data-width="100%" 
+                 data-numposts="5">
+            </div>
+        </section>
+    </main>
+    <br>
 <br>
 
 
