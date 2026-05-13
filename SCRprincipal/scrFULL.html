@@ -135,7 +135,7 @@
 </section>
 <br>
 <br>
-<section id="comentarios" style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: sans-serif; color: #ffffff;">
+<<section id="comentarios" style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: sans-serif; color: #ffffff;">
     <h2>O que achou do show?</h2>
     
     <!-- Botão para abrir/fechar os comentários -->
@@ -144,20 +144,21 @@
     </button>
 
     <!-- Contentor colapsável (escondido por padrão) -->
-    <div id="wrapper-comentarios" style="display: none; width: 100%; min-height: 400px;">
+    <div id="wrapper-comentarios" style="display: none; width: 100%; min-height: 250px;">
         <!-- Janela de Comentários do Cusdis -->
         <div id="cusdis_thread"
           data-host="https://cusdis.com"
           data-app-id="e696a73f-4e31-48f2-bf07-40465a2c94e5"
           data-page-id="home_show"
-          data-page-url="netlify.app"
+          data-page-url="https://stemcellsrock.netlify.app/"
           data-page-title="O Meu Show"
           data-theme="dark">
         </div>
     </div>
     
-    <!-- Configurações e Script do Cusdis -->
+    <!-- Configurações e Script de Controlo -->
     <script>
+        // Tradução obrigatória antes do carregamento
         window.CUSDIS_LOCALE = {
             "powered_by": "Comentários por",
             "post_comment": "Enviar comentário",
@@ -167,23 +168,38 @@
             "submit": "Publicar"
         };
 
-        // Lógica para abrir e fechar a janela
         const btn = document.getElementById('btn-comentarios');
         const wrapper = document.getElementById('wrapper-comentarios');
+        let cusdisCarregado = false;
 
+        // Injeta o script com o URL absoluto correto da CDN do Cusdis
+        function carregarCusdis() {
+            if (!cusdisCarregado) {
+                const script = document.createElement('script');
+                script.src = "https://cusdis.com/js/cusdis.es.js"; // URL Oficial e Completo
+                script.async = true;
+                script.defer = true;
+                document.body.appendChild(script);
+                cusdisCarregado = true;
+            }
+        }
+
+        // Lógica para alternar visibilidade (Collapsible)
         btn.addEventListener('click', () => {
             if (wrapper.style.display === 'none') {
                 wrapper.style.display = 'block';
                 btn.innerText = 'Fechar comentários';
-                btn.style.backgroundColor = '#333333'; // Muda a cor quando aberto
+                btn.style.backgroundColor = '#333333';
+                
+                // Executa a renderização após o container estar visível
+                carregarCusdis();
             } else {
                 wrapper.style.display = 'none';
                 btn.innerText = 'Deixar um comentário';
-                btn.style.backgroundColor = '#0070f3'; // Restaura a cor original
+                btn.style.backgroundColor = '#0070f3';
             }
         });
     </script>
-    <script async defer src="cusdis.com"></script>
 </section>
 
     <br>
