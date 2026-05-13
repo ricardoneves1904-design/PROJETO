@@ -135,20 +135,20 @@
 </section>
 <br>
 <br>
-<section id="comentarios" style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: sans-serif; color: #fff;">
+<section id="comentarios" style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: sans-serif; color: #ffffff;">
     <h2>O que achou do show?</h2>
     
-    <!-- 1. Janela de Comentários do Cusdis -->
-    <!-- LEMBRETE: Substitua 'O_SEU_SITE' pelo nome real do seu site no Netlify -->
+    <!-- Janela de Comentários do Cusdis com Modo Escuro Nativo Ativado -->
     <div id="cusdis_thread"
       data-host="https://cusdis.com"
       data-app-id="e696a73f-4e31-48f2-bf07-40465a2c94e5"
       data-page-id="home_show"
       data-page-url="https://stemcellsrock.netlify.app"
-      data-page-title="O Meu Show">
+      data-page-title="O Meu Show"
+      data-theme="dark">
     </div>
     
-    <!-- 2. Tradução dos textos da caixa para Português -->
+    <!-- Tradução dos textos internos para Português -->
     <script>
         window.CUSDIS_LOCALE = {
             "powered_by": "Comentários por",
@@ -160,23 +160,8 @@
         };
     </script>
     
-    <!-- 3. Script de Ativação Oficial do Cusdis (Link Correto) -->
+    <!-- Link Oficial e Correto para Ativar o Cusdis -->
     <script async defer src="cusdis.com"></script>
-    
-    <!-- 4. Código que força o Modo Escuro assim que a página carrega -->
-    <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                var iframe = document.querySelector('#cusdis_thread iframe');
-                if (iframe) {
-                    iframe.contentWindow.postMessage(JSON.stringify({
-                        type: 'setTheme',
-                        theme: 'dark'
-                    }), '*');
-                }
-            }, 500); // Aguarda meio segundo para garantir que o iframe carregou
-        });
-    </script>
 </section>
     <br>
 <br>
