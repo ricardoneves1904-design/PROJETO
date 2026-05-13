@@ -4,7 +4,7 @@ html
 <head>
     <meta charset="UTF-8">
     <title>Science Bot - Neon Edition</title>
-    <script src="https://puter.com"></script>
+    <script src="https://js.puter.com/v2/"></script>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -166,6 +166,8 @@ html
                  3. Mantém um tom científico e rigoroso.`,
                 { model: 'gpt-5-nano' }
             );
+            console.log(response)
+            
             addMessage(response.toString(), 'bot');
         } catch (err) {
             addMessage("Erro: Falha na sinapse de dados.", 'bot');
