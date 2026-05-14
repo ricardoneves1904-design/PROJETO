@@ -25,6 +25,13 @@ Configurações Gerais */
     }
 }
 
+/* Aplicar a todo o corpo do website */
+body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500; /* Peso ligeiramente maior para melhor leitura em fundo preto */
+    color: #e2e8f0;    /* Tom cinzento-azulado claro (evita o branco puro agressivo) */
+}
+
 body {
     display: flex;
     flex-direction: column;
