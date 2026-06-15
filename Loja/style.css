@@ -1,0 +1,539 @@
+/* ==========================================================================
+   1. Configurações Gerais & Reset de Layout
+   ========================================================================== */
+* {
+    box-sizing: border-box; /* Garante que padding e bordas não quebram larguras */
+    margin: 0;
+    padding: 0;
+}
+
+/* Elementos de Texto Globais */
+h1 {
+    text-shadow: 0 0 20px rgba(45, 226, 255, 0.8), 0 0 40px rgba(45, 226, 255, 0.4);
+    background-color: transparent !important;
+}
+
+h2 {
+    color: #FAF6DB;
+    text-shadow: 0 0 20px rgba(45, 226, 255, 0.8), 0 0 40px rgba(45, 226, 255, 0.4);
+    background-color: transparent !important;
+}
+
+p {
+    text-align: center;
+    background-color: transparent !important;
+}
+
+a {
+    text-decoration: none;
+    background-color: transparent !important;
+}
+
+/* Classes de Cores do Tema Universal SciCom */
+.yellow-text { color: #FAF6DB; background-color: transparent !important; }
+.stem-text { color: #2DE2FF; background-color: transparent !important; }
+.rock-text { color: #EECFE5; background-color: transparent !important; }
+
+/* Aplicar a todo o corpo do website */
+body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500; /* Peso ligeiramente maior para melhor leitura em fundo preto */
+    background-color: #0B0C10; /* Preto Noite */
+    color: #E0E0E0; /* Branco Suave */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 15px;
+    gap: 20px;
+    overflow-x: hidden; /* Previne scroll horizontal acidental em telemóveis */
+}
+
+/* ==========================================================================
+   2. Componentes de Interface (Coverpage & Botões Gerais)
+   ========================================================================== */
+.logo {
+    width: 100%;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0 auto;
+}
+
+.btn {
+  display:inline-block;
+  width:100%;
+  height:auto;
+  position:relative;
+}
+.btn-neon{
+  
+  color:#fffb00;
+ 
+}
+.btn-neon{
+  float:left;
+  display:flex;
+  font-size:1em;
+  text-transform:uppercase;
+  text-decoration:none;
+  background:transparent;
+  outline:none;
+  cursor:pointer;
+  border:2px solid transparent;
+  border-radius:4px;
+  transition:400ms;
+}
+.btn-neon:hover{
+  border: 2px solid;
+  box-shadow: 0 0 8px;
+}
+.btn-neon:focus{
+  color:#000;
+  border: 2px solid #fffb00;
+  background:#fffb00;
+  box-shadow: 0 0 18px #fffb00;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: transparent !important;
+    color: #FF31B1;
+    border: 2px solid #FF31B1;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: 0.4s;
+    box-shadow: 0 0 15px rgba(255, 49, 177, 0.3);
+    text-align: center;
+}
+
+.cta-button:hover {
+    background-color: #FF31B1 !important;
+    color: white;
+    box-shadow: 0 0 30px #EECBE2;
+}
+
+button { 
+    padding: 10px 20px; 
+    background: #2DE2FF; 
+    color: #0D3857; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    animation: pulse-neon 2s infinite; /* Ativa a animação */
+}
+
+@keyframes pulse-neon {
+    0% { box-shadow: 0 0 5px #2DE2FF, 0 0 10px #2DE2FF; }
+    50% { box-shadow: 0 0 15px #2DE2FF, 0 0 25px #c0ff2d; }
+    100% { box-shadow: 0 0 5px #2DE2FF, 0 0 10px #2DE2FF; }
+}
+
+button:hover { 
+    background: #c0ff2d;
+    color: #0B0C10;
+    transform: scale(1.05); 
+    animation: none; 
+    box-shadow: 0 0 30px #c0ff2d; 
+}
+
+/* Barra de Navegação Legada */
+.navImage { display: flex; align-items: flex-start; }
+.barra {
+    margin-top: 1px;
+    margin-left: 2px;
+    text-align: left;
+    color: #2DE2FF;
+    display: block;
+    max-width: 150px;
+}
+
+/* ==========================================================================
+   3. Página do Produto (Layout Flexível PC / Mobile)
+   ========================================================================== */
+.product-breadcrumbs {
+    margin: 15px 0;
+    font-size: 0.9rem;
+}
+
+.product-page-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    margin: 20px 0;
+    width: 100%;
+}
+
+/* Área Visual e Galeria Interativa */
+.product-visual {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+    min-width: 0; /* OBRIGATÓRIO: impede que a imagem de 3000px empurre o layout */
+}
+
+.main-image-container {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    justify-content: center;
+}
+
+.main-product-img {
+    width: 100%;
+    max-width: 450px;    /* Impede que a imagem passe de 450px */
+    height: auto;
+    max-height: 450px;   /* Impede que cresça na vertical */
+    object-fit: contain; /* Garante que a t-shirt inteira apareça sem cortes */
+    border-radius: 12px;
+    border: 1px solid rgba(45, 226, 255, 0.3);
+    box-shadow: 0 0 20px rgba(45, 226, 255, 0.15);
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 450px;
+    background: transparent;
+}
+
+.thumb {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid rgba(224, 224, 224, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.thumb:hover, .thumb.active {
+    border-color: #2DE2FF;
+    box-shadow: 0 0 15px rgba(45, 226, 255, 0.8);
+    transform: scale(1.05);
+}
+
+/* Painel de Informações do Produto */
+.product-info-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+    min-width: 0; /* Garante comportamento responsivo igual */
+}
+
+.product-info-panel h1 { text-align: left; font-size: 2rem; }
+.product-price { font-size: 1.8rem; font-weight: bold; }
+.product-description { text-align: left !important; line-height: 1.6; max-width: 500px; }
+
+.product-size-selection { display: flex; flex-direction: column; gap: 8px; }
+.product-size-selection label { font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
+.product-size-selection select {
+    width: 150px;
+    padding: 10px;
+    border: 2px solid #2DE2FF;
+    border-radius: 6px;
+    color: #E0E0E0;
+    background-color: #0B0C10;
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    max-width: 300px;
+    padding: 14px;
+    font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   4. Seletor de Quantidade Néon & Ícone do Carrinho
+   ========================================================================== */
+.product-quantity-input {
+    display: inline-flex;
+    align-items: center;
+    background-color: #0B0C10;
+    border: 2px solid #2DE2FF;
+    border-radius: 8px;
+    padding: 2px;
+    width: fit-content;
+    box-shadow: 0 0 10px rgba(45, 226, 255, 0.2);
+}
+
+.qty-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: transparent !important;
+    color: #2DE2FF !important;
+    border: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: none !important;
+    box-shadow: none !important;
+}
+
+.qty-btn:hover:not(:disabled) { color: #FF31B1 !important; transform: scale(1.1); }
+.qty-btn:disabled { color: #444 !important; opacity: 0.3; cursor: not-allowed; }
+
+.product-quantity-input input[type="number"] {
+    width: 50px;
+    height: 40px;
+    background-color: #0B0C10 !important;
+    color: #FAF6DB !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center !important;
+    border: none;
+    border-left: 1px solid rgba(45, 226, 255, 0.3);
+    border-right: 1px solid rgba(45, 226, 255, 0.3);
+    outline: none;
+}
+
+.product-quantity-input input::-webkit-outer-spin-button,
+.product-quantity-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.product-quantity-input input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Ícone de Carrinho no Cabeçalho */
+.cart-icon-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    color: #2DE2FF;
+    border-radius: 50%;
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.cart-icon-container svg { width: 22px; height: 22px; }
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #FF31B1 !important;
+    color: #FFFFFF !important;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    box-shadow: 0 0 8px #FF31B1;
+}
+
+.cart-icon-container:hover {
+    color: #FF31B1;
+    border-color: #FF31B1;
+    box-shadow: 0 0 12px rgba(255, 49, 177, 0.4);
+}
+
+.cart-icon-container.pulse-glow { animation: cart-pulse 0.5s ease-in-out; }
+@keyframes cart-pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0px #2DE2FF; }
+    50% { transform: scale(1.2); box-shadow: 0 0 20px #2DE2FF; }
+    100% { transform: scale(1); box-shadow: 0 0 0px #2DE2FF; }
+}
+
+/* ==========================================================================
+   5. Secção de Checkout & Pagamentos
+   ========================================================================== */
+.checkout-container {
+    border-top: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 40px 15px;
+    margin-top: 30px;
+    background-color: #0B0C10;
+}
+
+.checkout-container h2 { margin-bottom: 30px; text-align: center; }
+.checkout-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.checkout-form { flex: 1.5; display: flex; flex-direction: column; gap: 20px; }
+.checkout-form h3, .checkout-summary h3 { font-size: 1.3rem; margin-bottom: 10px; }
+
+.input-group { display: flex; flex-direction: column; gap: 8px; }
+.input-group label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #E0E0E0; text-align: left; }
+.input-group input {
+    padding: 12px;
+    background-color: #0B0C10 !important;
+    border: 1px solid rgba(45, 226, 255, 0.4);
+    border-radius: 6px;
+    color: #FAF6DB !important;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus { border-color: #2DE2FF; box-shadow: 0 0 12px rgba(45, 226, 255, 0.4); }
+
+.checkout-summary {
+    flex: 1;
+    background-color: rgba(45, 226, 255, 0.03);
+    border: 1px solid rgba(45, 226, 255, 0.2);
+    padding: 25px;
+    border-radius: 12px;
+    height: fit-content;
+}
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(224, 224, 224, 0.1);
+}
+.total-row {
+    border-bottom: none;
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding-top: 20px;
+}
+.checkout-submit-btn {
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* Configuração dos Métodos de Pagamento */
+.payment-methods-grid {
+    display: flex;
+    gap: 20px;
+    background-color: transparent !important;
+    margin-bottom: 10px;
+}
+.payment-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #E0E0E0;
+}
+.payment-radio-label input[type="radio"] {
+    accent-color: #2DE2FF;
+}
+.payment-fields {
+    border-left: 2px solid #FF31B1;
+    padding-left: 15px;
+    animation: fadeIn 0.3s ease;
+}
+
+    @keyframes fadeIn {from { opacity: 0; transform: translateY(-5px); }to { opacity: 1; transform: translateY(0); }}
+
+/* =6. Mailing List / Newsletter Section== */
+.newsletter-section {
+    border-top: 1px solid rgba(255, 49, 177, 0.2);
+    background-color: #0B0C10;
+    padding: 50px 15px;
+    text-align: center;
+}
+.newsletter-content {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+#newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    background: transparent !important;
+}
+#newsletter-form input {
+    padding: 12px 20px;
+    background-color: #0B0C10 !important;
+    border: 1px solid rgba(45, 226, 255, 0.4);
+    border-radius: 50px;
+    color: #FAF6DB !important;
+    font-size: 1rem;
+    width: 60%;
+    outline: none;
+    transition: all 0.3s ease;
+}
+#newsletter-form input:focus {
+    border-color: #2DE2FF;
+    box-shadow: 0 0 12px rgba(45, 226, 255, 0.4);
+}
+.newsletter-btn {
+    font-size: 16px !important;
+    padding: 12px 25px !important;
+    border-radius: 50px !important;
+    animation: none;
+}
+/* ==7. MEDIA QUERIES (Responsividade Mobile Suprema)======== */
+@media (max-width: 768px) {
+    .product-page-layout, .checkout-layout {
+        flex-direction: column;
+        gap: 30px;}
+    .checkout-layout {
+        flex-direction: column-reverse; 
+        /* Mostra o resumo em cima e formulário abaixo no tlm */}
+        .product-info-panel {
+            text-align: center;
+            align-items: center;
+        }
+            .product-info-panel h1,.product-description {
+                text-align: center !important;}
+                .add-to-cart-btn {max-width: 100%;}
+            }
+@media (max-width: 600px) {
+    #newsletter-form {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;}
+    #newsletter-form input {
+        width: 100%;}
+    }
+@media (max-width: 480px) {
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border-radius: 25px;
+    }
+    .thumb {
+        width: 60px;
+        height: 60px;
+    }
+    h1 {font-size: 1.6rem !important;}
+    .payment-methods-grid {
+        flex-direction: column;
+        gap: 12px;}
+    }

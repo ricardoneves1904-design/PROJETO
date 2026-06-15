@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O "Estaminalino" | Stem Cells Rock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<header>
+    <img src="../SCRprincipal/imagens/banner.jpeg" alt="imagem do banner" width="100%" height="auto">
+    <!-- Ícone do Carrinho com Contador Néon -->
+<a href="#checkout-section" class="cart-icon-container" aria-label="View Shopping Cart">
+    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://w3.org">
+        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+    </svg>
+    <!-- Contador flutuante que atualiza via JavaScript -->
+    <span id="cart-counter" class="cart-badge">0</span>
+</a>
+</header>
+     
+
+<body>
+    <div class="btn">
+  
+        <a href="../SCRprincipal/scrFULL.html" class="btn-neon">Voltar</a>
+     </div>
+
+    <!-- Secção da Mailing List -->
+<section class="newsletter-section">
+    <div class="newsletter-content">
+        <h2 class="stem-text">Junta-te ao nosso reservatório estaminal</h2>
+        <p class="yellow-text">Vamos informar-te acerca dos próximos shows ao vivo, produtos da nossa loja online e descobertas fresquinhas, através da nossa newsletter.</p>
+        
+        <form id="newsletter-form" onsubmit="subscreverNewsletter(event)">
+            <input type="email" id="newsletter-email" required placeholder="teu.email@stemcellsrock.com">
+            <button type="submit" class="cta-button newsletter-btn">Subscrever Newsletter</button>
+        </form>
+    </div>
+</section>
+    <br>
+    <br>
+
+<h1>LOJA ESTAMINAL: STEM CELLS ROCK!</h1>
+            <br>
+
+
+    <!-- Breadcrumbs com a cor do teu tema -->
+
+    
+<!-- Contentor Principal do Produto 1 -->
+<main class="product-page-layout">
+    
+    <!-- Área da Galeria de Imagens -->
+<section class="product-visual">
+    <!-- Imagem Principal como classe para o JavaScript controlar -->
+    <div class="main-image-container">
+        <img class="main-product-img" src= "Preta Logo frente.webp" alt="Produto1 - Frente">
+    </div>
+    
+    <!-- Contentor das Miniaturas (Thumbnails) -->
+    <div class="thumbnail-gallery">
+        <img class="thumb active" src= "Preta Logo frente.webp" alt="Frente da T-Shirt" onclick="changeImage(this)">
+        <img class="thumb" src= "Preta arv verso.webp" alt="Verso da T-Shirt" onclick="changeImage(this)">
+        <img class="thumb" src= "detalhe logo preta.jpg" alt="Detalhe do Tecido" onclick="changeImage(this)">
+    </div>
+</section>
+
+    <!-- Área de Compra e Detalhes -->
+    <section class="product-info-panel">
+        <h1 class="stem-text">Um "Estaminalino" com a sua T-shirt</h1>
+        <div class="product-price yellow-text">€25.00</div>
+        
+        <p class="product-description">
+            Softstyle 100% algodão manga curta, desenhada para uso diário confortável com fit perfeito. Tamanhos unisexo (baseado em tamanho homem).
+        </p>
+
+        <!-- Seleção de Tamanho -->
+        <div class="product-size-selection">
+            <label for="size" class="stem-text">Tamanho (Unisexo):</label>
+            <select id="size" name="size">
+                <option value="s">Small (S)</option>
+                <option value="m">Medium (M)</option>
+                <option value="l">Large (L)</option>
+                <option value="xl">X-Large (XL)</option>
+            </select>
+        </div>
+
+       <div class="product-quantity-input custom-form-element" role="group" aria-label="Quantity">
+    <!-- Botão de Diminuir (Néon Ciano) -->
+    <button class="qty-btn decrease-button" type="button" aria-label="Decrease quantity by 1" id="btn-decrease" onclick="alterarQuantidade(-1)">
+        <span class="decrease-icon">
+            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" d="M3 10v2h17v-2H3z" fill-rule="evenodd"></path>
+            </svg>
+        </span>
+    </button>
+    
+    <!-- Input Numérico Centralizado -->
+    <input id="quantity-input" name="quantity-input" type="number" value="1" min="1" max="9999" size="4" autocomplete="off" onchange="validarInput()">
+    
+    <!-- Botão de Aumentar (Néon Ciano) -->
+    <button class="qty-btn increase-button" type="button" aria-label="Increase quantity by 1" onclick="alterarQuantidade(1)">
+        <span class="increase-icon">
+            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3h-2v7H3v2h7v7h2v-7h7v-2h-7V3z"></path>
+            </svg>
+        </span>
+    </button>
+</div> 
+
+        <!-- Botão de Carrinho que herda as tuas animações néon e hover -->
+        <button class="add-to-cart-btn" onclick="addToCart()">Adicionar ao carrinho</button>
+    </section>
+</main>
+
+<!-- Contentor Principal do Produto 2 -->
+<main class="product-page-layout">
+    
+    <!-- Área da Galeria de Imagens -->
+<section class="product-visual">
+    <!-- Imagem Principal com ID para o JavaScript controlar -->
+    <div class="main-image-container">
+        <img class="main-product-img" src= "Branca Logo frente.webp" alt="Produto2 - Frente">
+    </div>
+    
+    <!-- Contentor das Miniaturas (Thumbnails) -->
+    <div class="thumbnail-gallery">
+        <img class="thumb active" src= "Branca Logo frente.webp" alt="Frente da T-Shirt" onclick="changeImage(this)">
+        <img class="thumb" src= "Branca arv verso.webp" alt="Verso da T-Shirt" onclick="changeImage(this)">
+        <img class="thumb" src= "Detalhe Logo branca.jpg" alt="Detalhe do Tecido" onclick="changeImage(this)">
+    </div>
+</section>
+
+    <!-- Área de Compra e Detalhes -->
+    <section class="product-info-panel">
+        <h1 class="stem-text">Um "Estaminalino" com a sua T-shirt</h1>
+        <div class="product-price yellow-text">€25.00</div>
+        
+        <p class="product-description">
+            Softstyle 100% algodão manga curta, desenhada para uso diário confortável com fit perfeito. Tamanhos unisexo (baseado em tamanho homem).
+        </p>
+
+        <!-- Seleção de Tamanho -->
+        <div class="product-size-selection">
+            <label for="size" class="stem-text">Tamanho (Unisexo):</label>
+            <select id="size" name="size">
+                <option value="s">Small (S)</option>
+                <option value="m">Medium (M)</option>
+                <option value="l">Large (L)</option>
+                <option value="xl">X-Large (XL)</option>
+            </select>
+        </div>
+
+        <div class="product-quantity-input custom-form-element" role="group" aria-label="Quantity">
+    <!-- Botão de Diminuir (Néon Ciano) -->
+    <button class="qty-btn decrease-button" type="button" aria-label="Decrease quantity by 1" id="btn-decrease" onclick="alterarQuantidade(-1)">
+        <span class="decrease-icon">
+            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" d="M3 10v2h17v-2H3z" fill-rule="evenodd"></path>
+            </svg>
+        </span>
+    </button>
+    
+    <!-- Input Numérico Centralizado -->
+    <input id="quantity-input" name="quantity-input" type="number" value="1" min="1" max="9999" size="4" autocomplete="off" onchange="validarInput()">
+    
+    <!-- Botão de Aumentar (Néon Ciano) -->
+    <button class="qty-btn increase-button" type="button" aria-label="Increase quantity by 1" onclick="alterarQuantidade(1)">
+        <span class="increase-icon">
+            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3h-2v7H3v2h7v7h2v-7h7v-2h-7V3z"></path>
+            </svg>
+        </span>
+    </button>
+</div>
+        <!-- Botão de Carrinho que herda as tuas animações néon e hover -->
+        <button class="add-to-cart-btn" onclick="addToCart()">Adicionar ao carrinho</button>
+    </section>
+</main>
+
+<!-- Secção de Checkout e Fecho da Transação -->
+<section id="checkout-section" class="checkout-container">
+    <h2 class="stem-text">Revisão e Confirmação da Encomenda</h2>
+    
+    <div class="checkout-layout">
+        <!-- Coluna Esquerda: Detalhes do Cliente -->
+        <form id="checkout-form" class="checkout-form" onsubmit="processarCheckout(event)">
+    <h3 class="yellow-text">1. Informação Transporte</h3>
+
+<div class="input-group">
+    <label for="customer-name">Nome Completo</label>
+    <input type="text" id="customer-name" required placeholder="Dr. Jane Doe">
+</div>
+
+<div class="input-group">
+    <label for="customer-email">Endereço de Email</label>
+    <input type="email" id="customer-email" required placeholder="science@universalscicom.com">
+</div>
+
+<div class="input-group">
+    <label for="customer-phone">Número de Telemóvel</label>
+    <input type="tel" id="customer-phone" placeholder="+351 912 345 678">
+</div>
+
+<!-- Novos Campos de Endereço -->
+<div class="input-group">
+    <label for="shipping-address">Morada (Rua)</label>
+    <input type="text" id="shipping-address" required placeholder="Avenida da Ciência, nº 42, 3º Esq">
+</div>
+
+<div style="display: flex; gap: 15px; background: transparent !important; margin: 0 !important;">
+    <div class="input-group" style="flex: 1;">
+        <label for="shipping-zip">Código Postal</label>
+        <input type="text" id="shipping-zip" required placeholder="3830-200">
+    </div>
+    <div class="input-group" style="flex: 1;">
+        <label for="shipping-city">Cidade (Localidade)</label>
+        <input type="text" id="shipping-city" required placeholder="Aveiro">
+    </div>
+</div>
+
+<div class="input-group">
+    <label for="shipping-country">País</label>
+    <input type="text" id="shipping-country" required placeholder="Portugal" value="Portugal">
+</div>
+
+    <!-- MÉTODOS DE PAGAMENTO -->
+    <h3 class="yellow-text" style="margin-top: 20px;">2. Método de Pagamento</h3>
+    <div class="payment-methods-grid">
+        <label class="payment-radio-label">
+            <input type="radio" name="payment-method" value="mbway" checked onchange="alternarCamposPagamento()"> 📱 MB WAY
+        </label>
+        <label class="payment-radio-label">
+            <input type="radio" name="payment-method" value="card" onchange="alternarCamposPagamento()"> 💳 Credit Card
+        </label>
+    </div>
+
+    <!-- Campos Dinâmicos de MB WAY -->
+    <div id="mbway-fields" class="input-group payment-fields">
+        <label for="mbway-phone">MB WAY Telemóvel</label>
+        <input type="tel" id="mbway-phone" placeholder="912 345 678">
+    </div>
+
+    <!-- Campos Dinâmicos de Cartão -->
+    <div id="card-fields" class="input-group payment-fields" style="display: none;">
+        <label for="card-number">Número Cartão</label>
+        <input type="text" id="card-number" placeholder="4000 1234 5678 9010">
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <input type="text" id="card-expiry" placeholder="MM/YY" style="width: 50%;">
+            <input type="text" id="card-cvc" placeholder="CVC" style="width: 50%;">
+        </div>
+    </div>
+
+    <button type="submit" class="cta-button checkout-submit-btn">Confirmar Compra</button>
+</form>
+
+        <!-- Coluna Direita: Resumo Financeiro -->
+        <div class="checkout-summary">
+            <h3 class="yellow-text">2. Resumo da Encomenda</h3>
+            <div class="summary-row">
+                <span>Produto:</span>
+                <span class="stem-text">T-Shirt Estaminalino</span>
+            </div>
+            <div class="summary-row">
+                <span>Quantidade:</span>
+                <span id="summary-qty" class="yellow-text">0</span>
+            </div>
+            <div class="summary-row total-row">
+                <span>Total:</span>
+                <span id="summary-total" class="stem-text">€0.00</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Liga o teu ficheiro unificado de JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
