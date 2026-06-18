@@ -1,20 +1,21 @@
 // Le o ficheiro .env e coloca as variaveis em process.env
 require("dotenv").config();
 
-const express = require('express');
-const cors = require('cors');
-const mysql = require('mysql2/promise');
-const nodemailer = require('nodemailer'); // Deixa já importado para a tua mailing list
+const express = require('express'); // Framework do servidor
+const cors = require('cors'); // Permite comunicação entre domínios diferentes.
+// Liberta o acesso para o frontend. Evita bloqueios de segurança no navegador.
+const mysql = require('mysql2/promise'); // Base de dados
+const nodemailer = require('nodemailer'); // Nodemailer para a mailing list
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configuração profissional com as tuas variáveis do .env
+// Configuração do pool com as variáveis do .env
 const pool = mysql.createPool({
     host: process.env.DATABASE_HOST || 'localhost',
     port: Number(process.env.DATABASE_PORT || 3306),
     user: process.env.DATABASE_USER || 'root',
-    password: process.env.DATABASE_PASSWORD || '', // Se for o Workbench, garante que a pass está no teu .env
+    password: process.env.DATABASE_PASSWORD || '', // Com o Workbench, garantir que a pass está no .env
     database: process.env.DATABASE_NAME || 'universal_scicom',
     waitForConnections: true,
     connectionLimit: 10,
@@ -23,7 +24,7 @@ const pool = mysql.createPool({
 
 // Middlewares obrigatórios
 app.use(cors());
-app.use(express.json()); // Permite receber dados em formato JSON do teu frontend
+app.use(express.json()); // Permite receber dados em formato JSON do frontend
 
 // Variável global para as notificações por e-mail
 let transportador;
@@ -33,7 +34,7 @@ async function iniciarServidor() {
     try {
         console.log('📦 A verificar tabelas na base de dados MySQL...');
 
-        // Configuração do Nodemailer (Lê as tuas definições SMTP do teu .env)
+        // Configuração do Nodemailer (Lê as definições SMTP do .env)
         transportador = nodemailer.createTransport({
             host: process.env.SMTP_HOST || "sandbox.smtp.mailtrap.io",
             port: Number(process.env.SMTP_PORT || 2525),
@@ -90,7 +91,7 @@ async function iniciarServidor() {
             )
         `);
 
-        // 4. [CORRIGIDO - AGORA DENTRO DA FUNÇÃO] Criar Tabela da Mailing List
+        // 4. Criar Tabela da Mailing List
         await pool.query(`
             CREATE TABLE IF NOT EXISTS newsletter (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -116,7 +117,7 @@ async function iniciarServidor() {
 iniciarServidor();
 
 /* ==========================================================================
-   ROTAS DA API (Endpoints chamados pelo teu ficheiro app.js)
+   ROTAS DA API (Endpoints chamados pelo ficheiro app.js)
    ========================================================================== */
 
 // 1. Rota para o Frontend listar ou verificar produtos
