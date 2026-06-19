@@ -1,9 +1,8 @@
-// Le o ficheiro .env e coloca as variaveis em process.env
+// Lê o ficheiro .env e coloca as variáveis em process.env
 require("dotenv").config();
 
 const express = require('express'); // Framework do servidor
 const cors = require('cors'); // Permite comunicação entre domínios diferentes.
-// Liberta o acesso para o frontend. Evita bloqueios de segurança no navegador.
 const mysql = require('mysql2/promise'); // Base de dados
 const nodemailer = require('nodemailer'); // Nodemailer para a mailing list
 
@@ -15,34 +14,34 @@ const pool = mysql.createPool({
     host: process.env.DATABASE_HOST || 'localhost',
     port: Number(process.env.DATABASE_PORT || 3306),
     user: process.env.DATABASE_USER || 'root',
-    password: process.env.DATABASE_PASSWORD || '', // Com o Workbench, garantir que a pass está no .env
+    password: process.env.DATABASE_PASSWORD || '', 
     database: process.env.DATABASE_NAME || 'stemcellsrock',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
 });
 
+// CONFIGURAÇÃO DO NODEMAILER
+const transporter = nodemailer.createTransport({
+    service: 'gmail', // Trata das portas e hosts automaticamente de forma segura
+    auth: {
+        user: process.env.GMAIL_USER,     
+        pass: process.env.GMAIL_APP_PASS  
+    }
+});
+
 // Middlewares obrigatórios
 app.use(cors());
 app.use(express.json()); // Permite receber dados em formato JSON do frontend
 
-// Variável global para as notificações por e-mail
-let transportador;
 
 // Função principal que valida a estrutura da Base de Dados
 async function iniciarServidor() {
+    console.log("👉 Email lido do .env:", process.env.GMAIL_USER);
+    console.log("👉 Pass existe no .env?:", process.env.GMAIL_APP_PASS ? "Sim ✅" : "Não, está UNDEFINED ❌");
+    
     try {
         console.log('📦 A verificar tabelas na base de dados MySQL...');
-
-        // Configuração do Nodemailer (Lê as definições SMTP do .env)
-        transportador = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || "sandbox.smtp.mailtrap.io",
-            port: Number(process.env.SMTP_PORT || 2525),
-            auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS
-            }
-        });
 
         // 1. Criar Tabela de Produtos usando o Pool unificado
         await pool.query(`
@@ -139,34 +138,34 @@ app.post('/api/newsletter', async (req, res) => {
     }
 
     try {
-        // Insere o e-mail na base de dados usando o pool
+        // Insere o e-mail na base de dados
         await pool.query('INSERT INTO newsletter (email) VALUES (?)', [email]);
 
-        // Envia o e-mail de boas-vindas com o Nodemailer
+        // Configuração do e-mail
         const emailBoasVindas = {
-            from: '"Universal SciCom" <newsletter@universalscicom.com>',
+            from: `"stemcellsrock" <${process.env.GMAIL_USER}>`, 
             to: email,
-            subject: '🚀 Welcome to the Universal SciCom Crew!',
+            subject: '🚀 Olá Estaminalino, bem vindo ao reservatório estaminal!',
             html: `
                 <div style="background-color: #0B0C10; color: #E0E0E0; padding: 30px; font-family: sans-serif; border: 2px solid #2DE2FF; border-radius: 8px;">
-                    <h1 style="color: #2DE2FF;">You are in!</h1>
-                    <p>Thank you for subscribing to our mailing list.</p>
-                    <p>From now on, you will be the first to know about our <strong>live science shows, upcoming workshops, and exclusive merchandising drops</strong>.</p>
+                    <h1 style="color: #2DE2FF;">Bem vindo ao NICHO!</h1>
+                    <p>Obrigado por teres subscrito a nossa lista de emails.</p>
+                    <p>A partir de agora vais ser o primeiro a saber acerca dos nossos <strong>shows ao vivo, avanços científicos relevantes, e lançamentos de produtos exclusivos de merchandising</strong>.</p>
                     <hr style="border: 0; border-top: 1px solid rgba(45, 226, 255, 0.3);">
-                    <p style="font-size: 12px; color: #888;">Universal SciCom — Connecting science and society.</p>
+                    <p style="font-size: 12px; color: #888;">Talk-Show: Stem Cells Rock! — Comunicação de Ciência.</p>
                 </div>
             `
         };
         
-        if (transportador) {
-            await transportador.sendMail(emailBoasVindas);
-        }
+        // transporter global visível aqui
+        await transporter.sendMail(emailBoasVindas);
 
         res.status(201).json({ mensagem: 'Subscrição concluída com sucesso!' });
 
     } catch (err) {
+        console.error("❌ Erro detalhado na rota:", err); 
         if (err.code === 'ER_DUP_ENTRY') {
-            return res.status(400).json({ erro: 'This email is already subscribed!' });
+            return res.status(400).json({ erro: 'Este email já está na nossa lista!' });
         }
         res.status(500).json({ erro: err.message });
     }
@@ -183,7 +182,7 @@ app.post('/api/clientes', async (req, res) => {
         );
         res.status(201).json({ id: resultado.insertId, mensagem: 'Cliente registado!' });
     } catch (err) {
-        // Se o email já existir (ER_DUP_ENTRY), vai buscar o ID desse cliente existente
+        // Se o email já existir, devolve o ID desse cliente existente
         if (err.code === 'ER_DUP_ENTRY') {
             try {
                 const [clientesExistentes] = await pool.query('SELECT id FROM clientes WHERE email = ?', [email]);

@@ -51,7 +51,7 @@ async function listarEncomendas(db) {
     if (encomendas.length === 0) {
         console.log('\nℹ️ Nenhuma encomenda encontrada na base de dados.\n');
     } else {
-        console.log('\n🚀 === LOGÍSTICA DE ENCOMENDAS (UNIVERSAL SCICOM) ===');
+        console.log('\n🚀 === LOGÍSTICA DE ENCOMENDAS (stemcellsrock) ===');
         console.table(encomendas);
         console.log(`📌 Total de encomendas: ${encomendas.length}`);
         console.log(`💡 Dica: Escreve 'node listar.js newsletter' para ver os subscritores.\n`);
@@ -74,7 +74,7 @@ async function listarMailingList(db) {
     if (subscritores.length === 0) {
         console.log('\nℹ️ A tua mailing list ainda não tem subscritores.\n');
     } else {
-        console.log('\n📬 === CONTACTOS DA MAILING LIST (UNIVERSAL SCICOM) ===');
+        console.log('\n📬 === CONTACTOS DA MAILING LIST (stemcellsrock) ===');
         console.table(subscritores);
         console.log(`📌 Total de subscritores ativos: ${subscritores.length}`);
         console.log(`💡 Dica: Escreve 'node listar.js' para voltar a ver as encomendas.\n`);
