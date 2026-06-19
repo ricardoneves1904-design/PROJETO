@@ -116,10 +116,10 @@ async function iniciarServidor() {
 iniciarServidor();
 
 /* ==========================================================================
-   ROTAS DA API (Endpoints chamados pelo ficheiro app.js)
+   ROTAS RECURSO: PRODUTOS (GET, POST, PUT, DELETE)
    ========================================================================== */
 
-// 1. Rota para o Frontend listar ou verificar produtos
+// 1. Listar ou verificar produtos
 app.get('/api/produtos', async (req, res) => {
     try {
         const [produtos] = await pool.query('SELECT * FROM produtos');
@@ -129,60 +129,81 @@ app.get('/api/produtos', async (req, res) => {
     }
 });
 
-// 2. Rota para subscrever na Mailing List
-app.post('/api/newsletter', async (req, res) => {
-    const { email } = req.body;
-
-    if (!email) {
-        return res.status(400).json({ erro: 'O e-mail é obrigatório.' });
+// 2. Criar um novo produto (CRUD)
+app.post('/api/produtos', async (req, res) => {
+    const { nome, preco, stock } = req.body;
+    if (!nome || preco === undefined) {
+        return res.status(400).json({ erro: 'Nome e preço são obrigatórios.' });
     }
-
     try {
-        // Insere o e-mail na base de dados
-        await pool.query('INSERT INTO newsletter (email) VALUES (?)', [email]);
-
-        // Configuração do e-mail
-        const emailBoasVindas = {
-            from: `"stemcellsrock" <${process.env.GMAIL_USER}>`, 
-            to: email,
-            subject: '🚀 Olá Estaminalino, bem vindo ao reservatório estaminal!',
-            html: `
-                <div style="background-color: #0B0C10; color: #E0E0E0; padding: 30px; font-family: sans-serif; border: 2px solid #2DE2FF; border-radius: 8px;">
-                    <h1 style="color: #2DE2FF;">Bem vindo ao NICHO!</h1>
-                    <p>Obrigado por teres subscrito a nossa lista de emails.</p>
-                    <p>A partir de agora vais ser o primeiro a saber acerca dos nossos <strong>shows ao vivo, avanços científicos relevantes, e lançamentos de produtos exclusivos de merchandising</strong>.</p>
-                    <hr style="border: 0; border-top: 1px solid rgba(45, 226, 255, 0.3);">
-                    <p style="font-size: 12px; color: #888;">Talk-Show: Stem Cells Rock! — Comunicação de Ciência.</p>
-                </div>
-            `
-        };
-        
-        // transporter global visível aqui
-        await transporter.sendMail(emailBoasVindas);
-
-        res.status(201).json({ mensagem: 'Subscrição concluída com sucesso!' });
-
+        const [resultado] = await pool.query(
+            'INSERT INTO produtos (nome, preco, stock) VALUES (?, ?, ?)',
+            [nome, preco, stock || 0]
+        );
+        res.status(201).json({ mensagem: 'Produto criado com sucesso!', produtoId: resultado.insertId });
     } catch (err) {
-        console.error("❌ Erro detalhado na rota:", err); 
-        if (err.code === 'ER_DUP_ENTRY') {
-            return res.status(400).json({ erro: 'Este email já está na nossa lista!' });
+        res.status(500).json({ erro: err.message });
+    }
+});
+
+// 3. Atualizar um produto por ID (CRUD)
+app.put('/api/produtos/:id', async (req, res) => {
+    const { id } = req.params;
+    const { nome, preco, stock } = req.body;
+    if (!nome || preco === undefined || stock === undefined) {
+        return res.status(400).json({ erro: 'Nome, preço e stock são obrigatórios.' });
+    }
+    try {
+        const [resultado] = await pool.query(
+            'UPDATE produtos SET nome = ?, preco = ?, stock = ? WHERE id = ?',
+            [nome, preco, stock, id]
+        );
+        if (resultado.affectedRows === 0) return res.status(404).json({ erro: 'Produto não encontrado.' });
+        res.json({ mensagem: 'Produto updated com sucesso!' });
+    } catch (err) {
+        res.status(500).json({ erro: err.message });
+    }
+});
+
+// 4. Remover um produto por ID (CRUD)
+app.delete('/api/produtos/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const [resultado] = await pool.query('DELETE FROM produtos WHERE id = ?', [id]);
+        if (resultado.affectedRows === 0) return res.status(404).json({ erro: 'Produto não encontrado.' });
+        res.json({ mensagem: 'Produto removido com sucesso!' });
+    } catch (err) {
+        if (err.code === 'ER_ROW_IS_REFERENCED_2') {
+            return res.status(400).json({ erro: 'Não pode eliminar este produto porque existem encomendas associadas.' });
         }
         res.status(500).json({ erro: err.message });
     }
 });
 
-// 3. Rota para registar ou reutilizar um cliente pelo Email
+/* ==========================================================================
+   ROTAS RECURSO: CLIENTES (GET, POST, PUT, DELETE)
+   ========================================================================== */
+
+// 1. Listar todos os clientes (CRUD)
+app.get('/api/clientes', async (req, res) => {
+    try {
+        const [clientes] = await pool.query('SELECT * FROM clientes');
+        res.json(clientes);
+    } catch (err) {
+        res.status(500).json({ erro: err.message });
+    }
+});
+
+// 2. Registar ou reutilizar um cliente pelo Email
 app.post('/api/clientes', async (req, res) => {
     const { nome, email, telefone } = req.body;
     try {
-        // Tenta inserir o novo cliente
         const [resultado] = await pool.query(
             'INSERT INTO clientes (nome, email, telefone) VALUES (?, ?, ?)',
             [nome, email, telefone]
         );
         res.status(201).json({ id: resultado.insertId, mensagem: 'Cliente registado!' });
     } catch (err) {
-        // Se o email já existir, devolve o ID desse cliente existente
         if (err.code === 'ER_DUP_ENTRY') {
             try {
                 const [clientesExistentes] = await pool.query('SELECT id FROM clientes WHERE email = ?', [email]);
@@ -195,30 +216,142 @@ app.post('/api/clientes', async (req, res) => {
     }
 });
 
-// 4. Rota para registar a Encomenda (Checkout) e atualizar o stock
+// 3. Atualizar dados de um cliente por ID (CRUD)
+app.put('/api/clientes/:id', async (req, res) => {
+    const { id } = req.params;
+    const { nome, email, telefone } = req.body;
+    if (!nome || !email) return res.status(400).json({ erro: 'Nome e email são obrigatórios.' });
+    try {
+        const [resultado] = await pool.query(
+            'UPDATE clientes SET nome = ?, email = ?, telefone = ? WHERE id = ?',
+            [nome, email, telefone || null, id]
+        );
+        if (resultado.affectedRows === 0) return res.status(404).json({ erro: 'Cliente não encontrado.' });
+        res.json({ mensagem: 'Dados do cliente atualizados com sucesso!' });
+    } catch (err) {
+        if (err.code === 'ER_DUP_ENTRY') return res.status(400).json({ erro: 'Este email já está associado a outro cliente.' });
+        res.status(500).json({ erro: err.message });
+    }
+});
+
+// 4. Remover um cliente por ID (CRUD)
+app.delete('/api/clientes/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const [resultado] = await pool.query('DELETE FROM clientes WHERE id = ?', [id]);
+        if (resultado.affectedRows === 0) return res.status(404).json({ erro: 'Cliente não encontrado.' });
+        res.json({ mensagem: 'Cliente removido com sucesso!' });
+    } catch (err) {
+        if (err.code === 'ER_ROW_IS_REFERENCED_2') {
+            return res.status(400).json({ erro: 'Não pode remover o cliente porque ele tem encomendas registadas.' });
+        }
+        res.status(500).json({ erro: err.message });
+    }
+});
+
+/* ==========================================================================
+   ROTAS RECURSO: NEWSLETTER (GET, POST, PUT, DELETE)
+   ========================================================================== */
+
+// 1. Listar todos os emails subscritos (CRUD)
+app.get('/api/newsletter', async (req, res) => {
+    try {
+        const [subscritores] = await pool.query('SELECT * FROM newsletter');
+        res.json(subscritores);
+    } catch (err) {
+        res.status(500).json({ erro: err.message });
+    }
+});
+
+// 2. Rota para subscrever na Mailing List
+app.post('/api/newsletter', async (req, res) => {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ erro: 'O e-mail é obrigatório.' });
+
+    try {
+        await pool.query('INSERT INTO newsletter (email) VALUES (?)', [email]);
+
+        const emailBoasVindas = {
+            from: `"stemcellsrock" <${process.env.GMAIL_USER}>`,
+            to: email,
+            subject: '🚀 Olá Estaminalino, bem vindo ao reservatório estaminal!',
+            html: `
+                <div style="background-color: #0B0C10; color: #E0E0E0; padding: 30px; font-family: sans-serif; border: 2px solid #2DE2FF; border-radius: 8px;">
+                    <h1 style="color: #2DE2FF;">Bem vindo ao NICHO!</h1>
+                    <p>Obrigado por teres subscrito a nossa lista de emails.</p>
+                    <p>A partir de agora vais ser o primeiro a saber acerca dos nossos <strong>shows ao vivo, avanços científicos relevantes, e lançamentos de produtos exclusivos de merchandising</strong>.</p>
+                    <hr style="border: 0; border-top: 1px solid rgba(45, 226, 255, 0.3);">
+                    <p style="font-size: 12px; color: #888;">Talk-Show: Stem Cells Rock! — Comunicação de Ciência.</p>
+                </div>
+            `
+        };
+
+        await transporter.sendMail(emailBoasVindas);
+        res.status(201).json({ mensagem: 'Subscrição concluída com sucesso!' });
+    } catch (err) {
+        console.error("❌ Erro detalhado na rota:", err);
+        if (err.code === 'ER_DUP_ENTRY') return res.status(400).json({ erro: 'Este email já está na nossa lista!' });
+        res.status(500).json({ erro: err.message });
+    }
+});
+
+// 3. Atualizar um email da newsletter por ID (CRUD)
+app.put('/api/newsletter/:id', async (req, res) => {
+    const { id } = req.params;
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ erro: 'O e-mail é obrigatório.' });
+
+    try {
+        const [resultado] = await pool.query('UPDATE newsletter SET email = ? WHERE id = ?', [email, id]);
+        if (resultado.affectedRows === 0) return res.status(404).json({ erro: 'Subscritor não encontrado.' });
+        res.json({ mensagem: 'Email da newsletter updated com sucesso!' });
+    } catch (err) {
+        if (err.code === 'ER_DUP_ENTRY') return res.status(400).json({ erro: 'Este email já está registado.' });
+        res.status(500).json({ erro: err.message });
+    }
+});
+
+// 4. Cancelar subscrição / Remover da newsletter por ID (CRUD)
+app.delete('/api/newsletter/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const [resultado] = await pool.query('DELETE FROM newsletter WHERE id = ?', [id]);
+        if (resultado.affectedRows === 0) return res.status(404).json({ erro: 'Subscritor não encontrado.' });
+        res.json({ mensagem: 'Email removido da newsletter com sucesso!' });
+    } catch (err) {
+        res.status(500).json({ erro: err.message });
+    }
+});
+
+/* ==========================================================================
+   ROTAS RECURSO: ENCOMENDAS (CORRIGIDO)
+   ========================================================================== */
+
 app.post('/api/encomendas', async (req, res) => {
     const { cliente_id, produto_id, quantity, morada, codigo_postal, localidade, pais } = req.body;
 
     try {
-        // Verificar se o produto existe e tem stock suficiente
+        // 1. Verificar se o produto existe e buscar stock
         const [produtos] = await pool.query('SELECT * FROM produtos WHERE id = ?', [produto_id]);
         if (produtos.length === 0) return res.status(404).json({ erro: 'Produto não encontrado.' });
         
         const produto = produtos[0];
         if (produto.stock < quantity) return res.status(400).json({ erro: 'Stock insuficiente.' });
 
-        // Grava no MySQL incluindo os dados de morada
+        // 2. Grava no MySQL usando o nome correto da coluna (quantidade)
         const [resultado] = await pool.query(
             'INSERT INTO encomendas (cliente_id, produto_id, quantidade, morada, codigo_postal, localidade, pais) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [cliente_id, produto_id, quantity, morada, codigo_postal, localidade, pais]
         );
         
-        // Retirar a quantidade vendida do stock do produto
+        // 3. Retirar a quantidade vendida do stock do produto
         await pool.query('UPDATE produtos SET stock = stock - ? WHERE id = ?', [quantity, produto_id]);
         
+        // 4. Devolve a resposta com a propriedade 'id' esperada pelo frontend
         res.status(201).json({ id: resultado.insertId, mensagem: 'Encomenda guardada com morada de envio!' });
 
     } catch (err) {
+        console.error("❌ Erro ao processar encomenda:", err.message);
         res.status(500).json({ erro: err.message });
     }
 });

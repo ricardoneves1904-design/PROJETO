@@ -1,5 +1,5 @@
 /**
- * Universal SciCom - Sistema de Scripts Unificado
+ * stemcellsrock - Sistema de Scripts Unificado
  * Controlo da Galeria, Quantidade, Carrinho, Pagamento e Servidor MySQL
  */
 
@@ -102,7 +102,7 @@ async function addToCart() {
         setTimeout(() => iconeCarrinho.classList.remove('pulse-glow'), 1000);
     }
 
-    alert(`Added ${quantidadeSelecionada} item(s) [Size: ${tamanhoSelecionado}] to your cart!`);
+    alert(`Adicionamos ${quantidadeSelecionada} item(s) [Size: ${tamanhoSelecionado}] ao teu carrinho!`);
 
     // Atualiza os números do painel de checkout automaticamente
     atualizarResumoCheckout();
@@ -150,7 +150,7 @@ async function processarCheckout(event) {
     event.preventDefault();
 
     if (totalItensNoCarrinho === 0) {
-        alert("Your shopping cart is empty!");
+        alert("O teu carrinho está vazio!");
         return;
     }
 
@@ -201,7 +201,7 @@ const pais = document.getElementById('shipping-country').value;
 });
 
         if (respostaEncomenda.ok) {
-            alert(`🎉 Success! Payment approved via ${metodoPagamento.toUpperCase()}. Your SciCom gear is secured.`);
+            alert(`🎉 Sucesso! Pagamento aprovado via ${metodoPagamento.toUpperCase()}. O teu material estaminal está garantido.`);
             
             // Limpa o estado da página e reinicia o carrinho
             totalItensNoCarrinho = 0;
@@ -213,7 +213,7 @@ const pais = document.getElementById('shipping-country').value;
 
     } catch (erro) {
         console.error(erro);
-        alert("Server communication error. Make sure 'node server.js' is running.");
+        alert("Erro de comunicação com o servidor. Garante que 'node server.js' está a correr.");
     } finally {
         botaoSubmit.disabled = false;
         botaoSubmit.textContent = "Complete Purchase";
@@ -237,13 +237,13 @@ async function subscreverNewsletter(event) {
         const dados = await resposta.json();
 
         if (resposta.ok) {
-            alert("🛸 Welcome aboard! Check your inbox for confirmation.");
+            alert("🛸 Bem vindo ao NICHO! Confirma no teu email-inbox.");
             document.getElementById('newsletter-form').reset();
         } else {
-            alert(dados.erro || "An error occurred.");
+            alert(dados.erro || "Ocorreu um erro.");
         }
     } catch (erro) {
         console.error(erro);
-        alert("Communication error with the server.");
+        alert("Erro de comunicação com o servidor.");
     }
 }
