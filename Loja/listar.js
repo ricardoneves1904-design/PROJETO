@@ -10,7 +10,7 @@ async function iniciarListagem() {
             host: 'localhost',
             user: 'root',
             password: '', // Mantém igual à do server.js
-            database: 'universal_scicom'
+            database: 'stemcellsrock'
         });
 
         // Se o utilizador escrever "newsletter" ou "emails", mostra a Mailing List

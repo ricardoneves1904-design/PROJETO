@@ -16,7 +16,7 @@ const pool = mysql.createPool({
     port: Number(process.env.DATABASE_PORT || 3306),
     user: process.env.DATABASE_USER || 'root',
     password: process.env.DATABASE_PASSWORD || '', // Com o Workbench, garantir que a pass está no .env
-    database: process.env.DATABASE_NAME || 'universal_scicom',
+    database: process.env.DATABASE_NAME || 'stemcellsrock',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
