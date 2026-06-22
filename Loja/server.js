@@ -50,7 +50,7 @@ async function iniciarServidor() {
                 nome VARCHAR(255) NOT NULL,
                 preco DECIMAL(10, 2) NOT NULL,
                 stock INT DEFAULT 0
-            )
+            ) ENGINE=InnoDB
         `);
 
         // [POVOAMENTO AUTOMÁTICO] Insere a T-shirt caso a tabela esteja vazia
@@ -70,10 +70,10 @@ async function iniciarServidor() {
                 nome VARCHAR(255) NOT NULL,
                 email VARCHAR(255) UNIQUE NOT NULL,
                 telefone VARCHAR(50)
-            )
+            ) ENGINE=InnoDB
         `);
 
-        // 3. Criar Tabela de Encomendas com Morada de Envio
+        // 3. Criar Tabela de Encomendas com Morada de Envio (COM ENGINE INNODB E RESTRICT)
         await pool.query(`
             CREATE TABLE IF NOT EXISTS encomendas (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -85,9 +85,9 @@ async function iniciarServidor() {
                 localidade VARCHAR(100) NOT NULL,
                 pais VARCHAR(100) NOT NULL,
                 data_encomenda TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE,
-                FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
-            )
+                FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE RESTRICT,
+                FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE RESTRICT
+            ) ENGINE=InnoDB
         `);
 
         // 4. Criar Tabela da Mailing List
