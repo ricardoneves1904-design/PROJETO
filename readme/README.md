@@ -99,7 +99,7 @@ GMAIL_APP_PASS=as_suas_16_letras_da_app_password
 
 ## 🛣️ Documentação das Rotas da API (Endpoints)
 
-A API segue o padrão arquitetural REST, disponibilizando operações CRUD completas para os principais recursos do sistema.
+A API segue o padrão arquitetural REST, disponibilizando operações CRUD completas para os principais recursos do sistema. Embora o fluxo atual da loja não precise de algumas destas rotas diretamente, existem cenários reais no comércio eletrónico onde estas rotas são obrigatórias. Imaginando que futuramente vai ser preciso construir um Painel de Administrador (Backoffice) para gerir a loja será preciso ter controlo sobre o catálogo de produtos ou sobre a lista de clientes.
 
 ### 👕 Recurso: Produtos (`/api/produtos`)
 * `GET /api/produtos` — Lista todos os produtos disponíveis no catálogo.
