@@ -2,12 +2,12 @@
 
 > Este website resume a atividade do projeto de comunicação de ciência "Talk-show: Stem Cells Rock", um espetáculo de teatro-musical acerca de células estaminais.
 
-![JavaScript](https://shields.io)
-![Node.js](https://shields.io)
-![Express](https://shields.io)
-![MySQL](https://shields.io)
-![Postman](https://shields.io)
-![HTML5](https://shields.io)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js)
+![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5)
 
 ## 💻 Sobre o projeto
 O website tem como ponto de entrada uma coverpage com o logotipo do projeto. O website tem pontos que direcionam o utilizador para sites de referência acerca da temática das células estaminais e para mais informações acerca do coordenador do projeto. Neste website há um carrossel de imagens, um vídeo (teaser) com um resumo do espetáculo, detalhes sobre a equipa, coordenação e contactos. Os utilizadores podem aceder a mais conteúdos que incluem mais imagens, vídeos (shows completos), uma "Playlist.html" com músicas e letras de canções e ChatBot de IA científico (responde às perguntas dos utilizadores baseado em evidências científicas). Na barra de navegação há um botão que direcciona o utilizador para uma loja online onde pode comprar produtos de merchandising e aderir à newsletter. Esta página está ligada a um servidor no backend e a base de dados MySQL.
