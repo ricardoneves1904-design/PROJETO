@@ -21,7 +21,6 @@
 
 <body>
     <div class="btn">
-  
         <a href="../SCRprincipal/scrFULL.html" class="btn-neon">Voltar</a>
      </div>
 
@@ -42,19 +41,17 @@
 
 <h1>LOJA ESTAMINAL: STEM CELLS ROCK!</h1>
             <br>
-
-
-    <!-- Breadcrumbs com a cor do teu tema -->
-
     
 <!-- Contentor Principal do Produto 1 -->
 <main class="product-page-layout">
+    <!-- ID do produto para o MySQL saber que esta é a T-Shirt Preta -->
+    <input type="hidden" name="product-db-id" value="1">
     
     <!-- Área da Galeria de Imagens obtidas no photopea com mockups de t-shirts branca e preta-->
 <section class="product-visual">
     <!-- Imagem Principal como classe para o JavaScript controlar -->
     <div class="main-image-container">
-        <img class="main-product-img" src= "Preta Logo frente.webp" alt="Produto1 - Frente">
+        <img class="main-product-img" src="Preta Logo frente.webp" alt="Produto1 - Frente">
     </div>
     
     <!-- Contentor das Miniaturas (Thumbnails) -->
@@ -76,8 +73,8 @@
 
         <!-- Seleção de Tamanho -->
         <div class="product-size-selection">
-            <label for="size" class="stem-text">Tamanho (Unisexo):</label>
-            <select id="size" name="size">
+            <label class="stem-text">Tamanho (Unisexo):</label>
+            <select name="size">
                 <option value="s">Small (S)</option>
                 <option value="m">Medium (M)</option>
                 <option value="l">Large (L)</option>
@@ -86,41 +83,43 @@
         </div>
 
        <div class="product-quantity-input custom-form-element" role="group" aria-label="Quantity">
-    <!-- Botão de Diminuir (Néon Ciano) -->
-    <button class="qty-btn decrease-button" type="button" aria-label="Decrease quantity by 1" id="btn-decrease" onclick="alterarQuantidade(-1)">
+    <!-- Botão de Diminuir (Mantém o ID btn-decrease para o CSS e adiciona a classe decrease-button) -->
+    <button class="qty-btn decrease-button" type="button" aria-label="Decrease quantity by 1" id="btn-decrease" onclick="alterarQuantidade(-1, this)">
         <span class="decrease-icon">
-            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://www.w3.org/2000/svg">
+            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://w3.org">
                 <path clip-rule="evenodd" d="M3 10v2h17v-2H3z" fill-rule="evenodd"></path>
             </svg>
         </span>
     </button>
     
-    <!-- Input Numérico Centralizado -->
-    <input id="quantity-input" name="quantity-input" type="number" value="1" min="1" max="9999" size="4" autocomplete="off" onchange="validarInput()">
+    <!-- Input Numérico (Mantém o ID quantity-input para o seu CSS e adiciona a classe product-qty-value para o JS) -->
+    <input id="quantity-input" class="product-qty-value" name="quantity-input" type="number" value="1" min="1" max="9999" size="4" autocomplete="off" onchange="validarInput(this)">
     
-    <!-- Botão de Aumentar (Néon Ciano) -->
-    <button class="qty-btn increase-button" type="button" aria-label="Increase quantity by 1" onclick="alterarQuantidade(1)">
+    <!-- Botão de Aumentar (Adiciona a classe increase-button) -->
+    <button class="qty-btn increase-button" type="button" aria-label="Increase quantity by 1" onclick="alterarQuantidade(1, this)">
         <span class="increase-icon">
-            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://www.w3.org/2000/svg">
+            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://w3.org">
                 <path d="M12 3h-2v7H3v2h7v7h2v-7h7v-2h-7V3z"></path>
             </svg>
         </span>
     </button>
 </div> 
 
-        <!-- Botão de Carrinho que herda as tuas animações néon e hover -->
-        <button class="add-to-cart-btn" onclick="addToCart()">Adicionar ao carrinho</button>
+        <!-- Botão de Carrinho contextualizado -->
+        <button class="add-to-cart-btn" onclick="addToCart(this)">Adicionar ao carrinho</button>
     </section>
 </main>
 
 <!-- Contentor Principal do Produto 2 -->
 <main class="product-page-layout">
+    <!-- ID do produto para o MySQL saber que esta é a T-Shirt Branca -->
+    <input type="hidden" name="product-db-id" value="2">
     
     <!-- Área da Galeria de Imagens -->
 <section class="product-visual">
     <!-- Imagem Principal com ID para o JavaScript controlar -->
     <div class="main-image-container">
-        <img class="main-product-img" src= "Branca Logo frente.webp" alt="Produto2 - Frente">
+        <img class="main-product-img" src="Branca Logo frente.webp" alt="Produto2 - Frente">
     </div>
     
     <!-- Contentor das Miniaturas (Thumbnails) -->
@@ -142,8 +141,8 @@
 
         <!-- Seleção de Tamanho -->
         <div class="product-size-selection">
-            <label for="size" class="stem-text">Tamanho (Unisexo):</label>
-            <select id="size" name="size">
+            <label class="stem-text">Tamanho (Unisexo):</label>
+            <select name="size">
                 <option value="s">Small (S)</option>
                 <option value="m">Medium (M)</option>
                 <option value="l">Large (L)</option>
@@ -152,29 +151,30 @@
         </div>
 
         <div class="product-quantity-input custom-form-element" role="group" aria-label="Quantity">
-    <!-- Botão de Diminuir (Néon Ciano) -->
-    <button class="qty-btn decrease-button" type="button" aria-label="Decrease quantity by 1" id="btn-decrease" onclick="alterarQuantidade(-1)">
+    <!-- Botão de Diminuir (Mantém o ID btn-decrease para o CSS e adiciona a classe decrease-button) -->
+    <button class="qty-btn decrease-button" type="button" aria-label="Decrease quantity by 1" id="btn-decrease" onclick="alterarQuantidade(-1, this)">
         <span class="decrease-icon">
-            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://www.w3.org/2000/svg">
+            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://w3.org">
                 <path clip-rule="evenodd" d="M3 10v2h17v-2H3z" fill-rule="evenodd"></path>
             </svg>
         </span>
     </button>
     
-    <!-- Input Numérico Centralizado -->
-    <input id="quantity-input" name="quantity-input" type="number" value="1" min="1" max="9999" size="4" autocomplete="off" onchange="validarInput()">
+    <!-- Input Numérico (Mantém o ID quantity-input para o seu CSS e adiciona a classe product-qty-value para o JS) -->
+    <input id="quantity-input" class="product-qty-value" name="quantity-input" type="number" value="1" min="1" max="9999" size="4" autocomplete="off" onchange="validarInput(this)">
     
-    <!-- Botão de Aumentar (Néon Ciano) -->
-    <button class="qty-btn increase-button" type="button" aria-label="Increase quantity by 1" onclick="alterarQuantidade(1)">
+    <!-- Botão de Aumentar (Adiciona a classe increase-button) -->
+    <button class="qty-btn increase-button" type="button" aria-label="Increase quantity by 1" onclick="alterarQuantidade(1, this)">
         <span class="increase-icon">
-            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://www.w3.org/2000/svg">
+            <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://w3.org">
                 <path d="M12 3h-2v7H3v2h7v7h2v-7h7v-2h-7V3z"></path>
             </svg>
         </span>
     </button>
-</div>
+</div> 
+
         <!-- Botão de Carrinho que herda as tuas animações néon e hover -->
-        <button class="add-to-cart-btn" onclick="addToCart()">Adicionar ao carrinho</button>
+        <button class="add-to-cart-btn" onclick="addToCart(this)">Adicionar ao carrinho</button>
     </section>
 </main>
 
@@ -258,9 +258,9 @@
         <div class="checkout-summary">
             <h3 class="yellow-text">2. Resumo da Encomenda</h3>
             <div class="summary-row">
-                <span>Produto:</span>
-                <span class="stem-text">T-Shirt Estaminalino</span>
-            </div>
+    <span>Produto:</span>
+    <span id="summary-product-name" class="stem-text">Nenhum produto selecionado</span>
+</div>
             <div class="summary-row">
                 <span>Quantidade:</span>
                 <span id="summary-qty" class="yellow-text">0</span>
@@ -273,8 +273,7 @@
     </div>
 </section>
 
-
-<!-- Liga o teu ficheiro unificado de JavaScript -->
-    <script src="app.js"></script>
+<!-- Liga o teu ficheiro unificado de JavaScript com Cache Busting para o Live Server -->
+    <script src="app.js?v=2"></script>
 </body>
 </html>
