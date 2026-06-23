@@ -339,31 +339,78 @@ app.delete('/api/newsletter/:id', async (req, res) => {
    ROTAS RECURSO: ENCOMENDAS (CORRIGIDO)
    ========================================================================== */
 
+// ==========================================================================
+// 1. ROTA ANTIGA (Mantida para compatibilidade e compras individuais)
+// ==========================================================================
 app.post('/api/encomendas', async (req, res) => {
     const { cliente_id, produto_id, quantity, morada, codigo_postal, localidade, pais } = req.body;
 
     try {
-        // 1. Verificar se o produto existe e buscar stock
         const [produtos] = await pool.query('SELECT * FROM produtos WHERE id = ?', [produto_id]);
         if (produtos.length === 0) return res.status(404).json({ erro: 'Produto não encontrado.' });
         
         const produto = produtos[0];
         if (produto.stock < quantity) return res.status(400).json({ erro: 'Stock insuficiente.' });
 
-        // 2. Grava no MySQL usando o nome correto da coluna (quantidade)
         const [resultado] = await pool.query(
             'INSERT INTO encomendas (cliente_id, produto_id, quantidade, morada, codigo_postal, localidade, pais) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [cliente_id, produto_id, quantity, morada, codigo_postal, localidade, pais]
         );
         
-        // 3. Retirar a quantidade vendida do stock do produto
         await pool.query('UPDATE produtos SET stock = stock - ? WHERE id = ?', [quantity, produto_id]);
         
-        // 4. Devolve a resposta com a propriedade 'id' esperada pelo frontend
         res.status(201).json({ id: resultado.insertId, mensagem: 'Encomenda guardada com morada de envio!' });
 
     } catch (err) {
         console.error("❌ Erro ao processar encomenda:", err.message);
         res.status(500).json({ erro: err.message });
+    }
+});
+
+// ==========================================================================
+// 2. NOVA ROTA MULTI-PRODUTO CORRIGIDA
+// ==========================================================================
+app.post('/api/encomendas/multiplas', async (req, res) => {
+    const { cliente_id, itens, morada, codigo_postal, localidade, pais } = req.body;
+
+    if (!itens || !Array.isArray(itens) || itens.length === 0) {
+        return res.status(400).json({ erro: 'O carrinho está vazio ou é inválido.' });
+    }
+
+    try {
+        // 1. Validar primeiro se TODOS os produtos têm stock antes de gravar qualquer coisa
+        for (const item of itens) {
+            const [produtos] = await pool.query('SELECT stock, nome FROM produtos WHERE id = ?', [item.id]);
+            if (produtos.length === 0) {
+                return res.status(404).json({ erro: `Produto com ID ${item.id} não encontrado.` });
+            }
+            // CORREÇÃO AQUI: Adicionado [0] para ler o primeiro registo da tabela
+            if (produtos[0].stock < item.quantidade) {
+                return res.status(400).json({ erro: `Stock insuficiente para o produto: ${produtos[0].nome}.` });
+            }
+        }
+
+        // 2. Se todos tiverem stock, faz as inserções e abate o stock no MySQL
+        for (const item of itens) {
+            // Grava a encomenda
+            await pool.query(
+                `INSERT INTO encomendas (cliente_id, produto_id, quantidade, morada, codigo_postal, localidade, pais) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                [cliente_id, item.id, item.quantidade, morada, codigo_postal, localidade, pais]
+            );
+
+            // Atualiza o stock retirando a quantidade vendida
+            await pool.query(
+                'UPDATE produtos SET stock = stock - ? WHERE id = ?', 
+                [item.quantidade, item.id]
+            );
+        }
+
+        // Responde apenas UMA vez ao browser com sucesso absoluto
+        res.status(201).json({ mensagem: 'Todas as encomendas foram registadas e o stock atualizado!' });
+
+    } catch (error) {
+        console.error('❌ Erro ao inserir múltiplas encomendas:', error.message);
+        res.status(500).json({ erro: 'Erro interno ao salvar os produtos no MySQL.' });
     }
 });

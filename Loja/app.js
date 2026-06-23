@@ -4,7 +4,7 @@
  */
 
 // Variáveis globais para controlar o carrinho no ecrã
-let totalItensNoCarrinho = 0;
+let carrinho = []; // Lista que vai guardar todos os produtos adicionados
 const PRECO_PRODUTO = 25.00;
 // Guarda o ID do último produto que o utilizador adicionou ao carrinho
 let idDoProdutoSelecionadoParaCheckout = 1; 
@@ -88,32 +88,43 @@ async function addToCart(elementoBotao) {
     const selectTamanho = principalProduto.querySelector('select[name="size"]');
     const inputQuantidade = principalProduto.querySelector('.product-qty-value');
     const inputId = principalProduto.querySelector('input[name="product-db-id"]');
-    
-    const contadorCarrinho = document.getElementById('cart-counter');
-    const iconeCarrinho = document.querySelector('.cart-icon-container');
+    const tituloProduto = principalProduto.querySelector('h1.stem-text');
 
-    if (!selectTamanho || !inputQuantidade || !inputId) return;
+    if (!selectTamanho || !inputQuantidade || !inputId || !tituloProduto) return;
 
+    const idProduto = parseInt(inputId.value);
+    const nomeProduto = tituloProduto.textContent;
     const tamanhoSelecionado = selectTamanho.value.toUpperCase();
     const quantidadeSelecionada = parseInt(inputQuantidade.value) || 1;
-    
-    // Atualiza o ID global para o checkout saber qual produto foi escolhido (1 ou 2)
-    idDoProdutoSelecionadoParaCheckout = parseInt(inputId.value);
 
-    // Captura o título do produto dinamicamente (Preta ou Branca)
-    const tituloProduto = principalProduto.querySelector('h1.stem-text');
-    nomeDoProdutoSelecionadoParaCheckout = tituloProduto ? tituloProduto.textContent : "T-Shirt Estaminalino";
+    // Procura se este produto com este tamanho já está no carrinho
+    const produtoExistente = carrinho.find(item => item.id === idProduto && item.tamanho === tamanhoSelecionado);
 
-    // Atualização Visual do Contador no Topo
-    totalItensNoCarrinho += quantidadeSelecionada;
-    if (contadorCarrinho) contadorCarrinho.textContent = totalItensNoCarrinho;
+    if (produtoExistente) {
+        produtoExistente.quantidade += quantidadeSelecionada;
+    } else {
+        // Se for novo, adiciona à lista
+        carrinho.push({
+            id: idProduto,
+            nome: nomeProduto,
+            tamanho: tamanhoSelecionado,
+            quantidade: quantidadeSelecionada
+        });
+    }
 
+    // Atualiza o contador visual do topo da página
+    const totalItens = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
+    const contadorCarrinho = document.getElementById('cart-counter');
+    if (contadorCarrinho) contadorCarrinho.textContent = totalItens;
+
+    // Animação Néon no Ícone do Carrinho
+    const iconeCarrinho = document.querySelector('.cart-icon-container');
     if (iconeCarrinho) {
         iconeCarrinho.classList.add('pulse-glow');
         setTimeout(() => iconeCarrinho.classList.remove('pulse-glow'), 1000);
     }
 
-    alert(`Adicionamos ${quantidadeSelecionada} item(s) [Size: ${tamanhoSelecionado}] ao teu carrinho!`);
+    alert(`Adicionamos ${quantidadeSelecionada}x ${nomeProduto} [Size: ${tamanhoSelecionado}] ao teu carrinho!`);
 
     atualizarResumoCheckout();
 }
@@ -121,22 +132,35 @@ async function addToCart(elementoBotao) {
 function atualizarResumoCheckout() {
     const summaryQty = document.getElementById('summary-qty');
     const summaryTotal = document.getElementById('summary-total');
-    const summaryName = document.getElementById('summary-product-name'); // <--- Adicione esta linha
+    const summaryName = document.getElementById('summary-product-name');
 
-    if (summaryQty && summaryTotal) {
-        summaryQty.textContent = totalItensNoCarrinho;
-        summaryTotal.textContent = `€${(totalItensNoCarrinho * PRECO_PRODUTO).toFixed(2)}`;
-    }
+    // Calcula os totais combinados de todos os itens do carrinho
+    const totalQtd = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
+    const totalDinheiro = totalQtd * PRECO_PRODUTO;
 
-    // Atualiza o nome do produto no resumo do checkout
-    if (summaryName && nomeDoProdutoSelecionadoParaCheckout) {
-        summaryName.textContent = nomeDoProdutoSelecionadoParaCheckout;
+    if (summaryQty) summaryQty.textContent = totalQtd;
+    if (summaryTotal) summaryTotal.textContent = `€${totalDinheiro.toFixed(2)}`;
+
+    // Cria a lista visual de produtos para o resumo
+    if (summaryName) {
+        if (carrinho.length === 0) {
+            summaryName.innerHTML = "<div>Nenhum produto selecionado</div>";
+            return;
+        }
+
+        // Gera o HTML dinâmico para cada produto diferente comprado
+        summaryName.innerHTML = carrinho.map(item => `
+            <div style="margin-bottom: 5px; font-size: 0.95em;">
+                • ${item.quantidade}x ${item.nome} (${item.tamanho})
+            </div>
+        `).join('');
     }
 }
-
 /* ==========================================================================
-   4. LÓGICA DE PAGAMENTO SIMULADO E CHECKOUT (CONEXÃO MYSQL)
+   4. LÓGICA DE CHECKOUT MULTI-PRODUTO E PAGAMENTO (CONEXÃO MYSQL)
    ========================================================================== */
+
+// --- FUNÇÃO RECUPERADA (ADICIONADA DE VOLTA) ---
 function alternarCamposPagamento() {
     const metodoInput = document.querySelector('input[name="payment-method"]:checked');
     if (!metodoInput) return;
@@ -161,7 +185,7 @@ function alternarCamposPagamento() {
 async function processarCheckout(event) {
     event.preventDefault();
 
-    if (totalItensNoCarrinho === 0) {
+    if (carrinho.length === 0) {
         alert("O teu carrinho está vazio!");
         return;
     }
@@ -194,14 +218,13 @@ async function processarCheckout(event) {
 
         if (!respostaCliente.ok) throw new Error(dadosCliente.erro);
 
-        // 2. Registar a Encomenda associada a esse Cliente usando o ID dinâmico
-        const respostaEncomenda = await fetch('http://localhost:3000/api/encomendas', {
+        // 2. Envia o carrinho completo para a rota múltipla
+        const respostaEncomenda = await fetch('http://localhost:3000/api/encomendas/multiplas', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 cliente_id: dadosCliente.id,
-                produto_id: idDoProdutoSelecionadoParaCheckout, // <--- Dinâmico (1 ou 2)
-                quantity: totalItensNoCarrinho,
+                itens: carrinho,
                 morada: morada,
                 codigo_postal: codigo_postal,
                 localidade: localidade,
@@ -209,20 +232,41 @@ async function processarCheckout(event) {
             })
         });
 
-        if (respostaEncomenda.ok) {
-            alert(`🎉 Sucesso! Pagamento aprovado via ${metodoPagamento.toUpperCase()}. O teu material estaminal está garantido.`);
-            
-            // Limpa o estado da página e reinicia o carrinho
-            totalItensNoCarrinho = 0;
-            document.getElementById('cart-counter').textContent = "0";
-            document.getElementById('checkout-form').reset();
-            atualizarResumoCheckout();
-            alternarCamposPagamento();
+        if (!respostaEncomenda.ok) {
+            const textoErro = await respostaEncomenda.text();
+            let mensagemErro = "Erro ao registar os produtos.";
+            try {
+                const jsonErro = JSON.parse(textoErro);
+                mensagemErro = jsonErro.erro || mensagemErro;
+            } catch(e) {
+                mensagemErro = textoErro || mensagemErro;
+            }
+            throw new Error(mensagemErro);
         }
 
+        // 3. Sucesso Absoluto
+        alert(`🎉 Sucesso! Pagamento aprovado via ${metodoPagamento.toUpperCase()}. O teu material estaminal está garantido.`);
+        
+        carrinho = [];
+        const contadorCarrinho = document.getElementById('cart-counter');
+        if (contadorCarrinho) contadorCarrinho.textContent = "0";
+        
+        document.getElementById('checkout-form').reset();
+
+        // Limpa todos os seletores de quantidade da página
+        document.querySelectorAll('.product-qty-value').forEach(input => {
+            input.value = 1;
+        });
+        document.querySelectorAll('.decrease-button, #btn-decrease').forEach(btn => {
+            btn.disabled = true;
+        });
+
+        atualizarResumoCheckout();
+        alternarCamposPagamento(); // <--- Agora já vai funcionar sem crashar!
+
     } catch (erro) {
-        console.error(erro);
-        alert("Erro de comunicação com o servidor. Garante que 'node server.js' está a correr.");
+        console.error("Erro capturado no checkout:", erro);
+        alert(`Erro: ${erro.message}\nSe os dados entraram no MySQL, ignora este aviso e verifica a resposta do teu servidor.`);
     } finally {
         botaoSubmit.disabled = false;
         botaoSubmit.textContent = "Complete Purchase";
