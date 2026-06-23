@@ -55,25 +55,25 @@ async function iniciarServidor() {
 
         // [POVOAMENTO AUTOMÁTICO] Insere as T-shirts caso não existam na base de dados
 
-// T-Shirt Preta (ID 1)
-const [tshirtPreta] = await pool.query('SELECT * FROM produtos WHERE id = 1');
-if (tshirtPreta.length === 0) {
-    await pool.query(`
-        INSERT INTO produtos (id, nome, preco, stock) 
-        VALUES (1, 'Stem Cells Rock T-Shirt Preta', 25.00, 500)
-    `);
-    console.log('👕 T-shirt Preta adicionada ao MySQL com ID 1!');
-}
+        // T-Shirt Preta (ID 1)
+        const [tshirtPreta] = await pool.query('SELECT * FROM produtos WHERE id = 1');
+        if (tshirtPreta.length === 0) {
+            await pool.query(`
+                INSERT INTO produtos (id, nome, preco, stock) 
+                VALUES (1, 'Stem Cells Rock T-Shirt Preta', 25.00, 500)
+            `);
+            console.log('👕 T-shirt Preta adicionada ao MySQL com ID 1!');
+        }
 
-// T-Shirt Branca (ID 2)
-const [tshirtBranca] = await pool.query('SELECT * FROM produtos WHERE id = 2');
-if (tshirtBranca.length === 0) {
-    await pool.query(`
-        INSERT INTO produtos (id, nome, preco, stock) 
-        VALUES (2, 'Stem Cells Rock T-Shirt Branca', 25.00, 500)
-    `);
-    console.log('👕 T-shirt Branca adicionada ao MySQL com ID 2!');
-}
+        // T-Shirt Branca (ID 2)
+        const [tshirtBranca] = await pool.query('SELECT * FROM produtos WHERE id = 2');
+        if (tshirtBranca.length === 0) {
+            await pool.query(`
+                INSERT INTO produtos (id, nome, preco, stock) 
+                VALUES (2, 'Stem Cells Rock T-Shirt Branca', 25.00, 500)
+            `);
+            console.log('👕 T-shirt Branca adicionada ao MySQL com ID 2!');
+        }
 
         // 2. Criar Tabela de Clientes
         await pool.query(`
