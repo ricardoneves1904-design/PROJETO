@@ -130,7 +130,7 @@ A API segue o padrão arquitetural REST, disponibilizando operações CRUD compl
 ---
 
 ## 🧪 Testes da API
-Todas as rotas foram extensamente validadas utilizando o **Postman** (ou a extensão **REST Client**), cobrindo cenários de sucesso e respostas controladas de erro (como HTTP 400 para stock insuficiente ou duplicações e HTTP 404 para recursos inexistentes).
+Todas as rotas foram extensamente validadas utilizando o **Postman**, cobrindo cenários de sucesso e respostas controladas de erro (como HTTP 400 para stock insuficiente ou duplicações e HTTP 404 para recursos inexistentes).
 
 ![Validação Postman](./img/postmanTestes.jpg)
 
