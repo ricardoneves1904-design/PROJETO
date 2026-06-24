@@ -35,7 +35,10 @@ Na barra de navegação tem um botão que direciona para a [Loja Estaminal](../L
 
 # 🚀 Stem Cells Rock! — Backend API (Loja Online & Newsletter)
 
-Este projeto inclui o desenvolvimento do servidor backend para a plataforma **Stem Cells Rock!**, um projeto focado na comunicação de ciência. A API foi desenvolvida em Node.js com Express e interage com uma base de dados relacional MySQL (InnoDB), incluindo validações completas de segurança, gestão de stock de inventário e envio automatizado de emails através do Nodemailer (Gmail SMTP). O projeto tem um ficheiro **listar.js** que constitui uma ponte entre a base de dados e o interface do utilizador (mimetiza o backoffice), que permite criar listas ou tabelas estruturadas com base na informação atualizada das encomendas, produtos ou subscrição da newsletter.
+Este projeto inclui o desenvolvimento do servidor backend para a plataforma **Stem Cells Rock!**, um projeto focado na comunicação de ciência. A API foi desenvolvida em Node.js com Express e interage com uma base de dados relacional MySQL (InnoDB), incluindo validações completas de segurança, gestão de stock de inventário e envio automatizado de emails através do Nodemailer (Gmail SMTP).
+![Newsletter](./img/emailNewsletter.png)
+
+O projeto tem um ficheiro **listar.js** que constitui uma ponte entre a base de dados e o interface do utilizador (mimetiza o backoffice), que permite criar listas ou tabelas estruturadas com base na informação atualizada das encomendas, produtos ou subscrição da newsletter.
 
 ---
 
