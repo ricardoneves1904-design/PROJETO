@@ -83,7 +83,7 @@
         </div>
 
        <div class="product-quantity-input custom-form-element" role="group" aria-label="Quantity">
-    <!-- Botão de Diminuir (Mantém o ID btn-decrease para o CSS e adiciona a classe decrease-button) -->
+    <!-- Botão de Diminuir -->
     <button class="qty-btn decrease-button" type="button" aria-label="Decrease quantity by 1" id="btn-decrease" onclick="alterarQuantidade(-1, this)">
         <span class="decrease-icon">
             <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://w3.org">
@@ -92,10 +92,10 @@
         </span>
     </button>
     
-    <!-- Input Numérico (Mantém o ID quantity-input para o seu CSS e adiciona a classe product-qty-value para o JS) -->
+    <!-- Input Numérico -->
     <input id="quantity-input" class="product-qty-value" name="quantity-input" type="number" value="1" min="1" max="9999" size="4" autocomplete="off" onchange="validarInput(this)">
     
-    <!-- Botão de Aumentar (Adiciona a classe increase-button) -->
+    <!-- Botão de Aumentar -->
     <button class="qty-btn increase-button" type="button" aria-label="Increase quantity by 1" onclick="alterarQuantidade(1, this)">
         <span class="increase-icon">
             <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://w3.org">
@@ -151,7 +151,7 @@
         </div>
 
         <div class="product-quantity-input custom-form-element" role="group" aria-label="Quantity">
-    <!-- Botão de Diminuir (Mantém o ID btn-decrease para o CSS e adiciona a classe decrease-button) -->
+    <!-- Botão de Diminuir -->
     <button class="qty-btn decrease-button" type="button" aria-label="Decrease quantity by 1" id="btn-decrease" onclick="alterarQuantidade(-1, this)">
         <span class="decrease-icon">
             <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://w3.org">
@@ -160,10 +160,10 @@
         </span>
     </button>
     
-    <!-- Input Numérico (Mantém o ID quantity-input para o seu CSS e adiciona a classe product-qty-value para o JS) -->
+    <!-- Input Numérico -->
     <input id="quantity-input" class="product-qty-value" name="quantity-input" type="number" value="1" min="1" max="9999" size="4" autocomplete="off" onchange="validarInput(this)">
     
-    <!-- Botão de Aumentar (Adiciona a classe increase-button) -->
+    <!-- Botão de Aumentar -->
     <button class="qty-btn increase-button" type="button" aria-label="Increase quantity by 1" onclick="alterarQuantidade(1, this)">
         <span class="increase-icon">
             <svg fill="currentColor" height="17" viewBox="0 0 22 22" width="17" xmlns="http://w3.org">
@@ -173,7 +173,7 @@
     </button>
 </div> 
 
-        <!-- Botão de Carrinho que herda as tuas animações néon e hover -->
+        <!-- Botão de Carrinho -->
         <button class="add-to-cart-btn" onclick="addToCart(this)">Adicionar ao carrinho</button>
     </section>
 </main>
@@ -202,7 +202,7 @@
     <input type="tel" id="customer-phone" placeholder="+351 912 345 678">
 </div>
 
-<!-- Novos Campos de Endereço -->
+<!-- Campos de Endereço -->
 <div class="input-group">
     <label for="shipping-address">Morada (Rua)</label>
     <input type="text" id="shipping-address" required placeholder="Avenida da Ciência, nº 42, 3º Esq">
@@ -273,7 +273,7 @@
     </div>
 </section>
 
-<!-- Liga o teu ficheiro unificado de JavaScript com Cache Busting para o Live Server -->
+<!-- Liga o ficheiro unificado de JavaScript com Cache Busting para o Live Server -->
     <script src="app.js?v=2"></script>
 </body>
 </html>
