@@ -15,7 +15,7 @@ O website tem como ponto de entrada uma coverpage com o logotipo do projeto. O w
 ## 📦 Como navegar no projeto
 O projeto está em repositório no github. O ponto de entrada é a [COVERPAGE](../index.html). O SABER MAIS dá acesso à página principal [scrFULL](../SCRprincipal/scrFULL.html).
 
-![SCRFull](./img/SCRFull1.jpg)
+![SCRFull](./img/SCRFull1.png)
 
 A página tem um pequeno carrossel de imagens e o utilizador tem acesso a uma playlist onde pode ouvir as músicas do show enquanto vê as letras das canções num collapsible [Playlist](../Playlist/playlist.html) em modo playall de forma aleatória ou sequencial, ou pode escolher manualmente que músicas quer ouvir. Para além das músicas o utilizador pode ver vídeos completos de 2 apresentações diferentes que são carregadas a partir de repositório unlisted do Youtube. [Vídeos](../SCRprincipal/videos.html)
 
@@ -25,7 +25,7 @@ A página inclui também um [Stem Cell IA](../SCRprincipal/scrSciBot.html) que �
 
 Na barra de navegação tem um botão que direciona para a [Loja Estaminal](../Loja/loja.html) onde está a ligação ao backend e BDs.
 
-![SCRFull](./img/SCRFull2.jpg)
+![SCRFull](./img/SCRFull2.png)
 
 ## 🛠 Outras funcionalidades
 * **Loja Online:** Futura integração com API de loja Online ligada a servidor e base de dados com `server.js`, `app.js` e `mysql2`.
