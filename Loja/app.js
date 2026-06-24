@@ -47,7 +47,7 @@ function changeImage(element) {
 }
 
 /* ==========================================================================
-   2. SELETOR DE QUANTIDADE CORRIGIDO (Mantém o CSS Néon Intacto)
+   2. SELETOR DE QUANTIDADE
    ========================================================================== */
 function alterarQuantidade(valor, elementoBotao) {
     const blocoQuantidade = elementoBotao.closest('.product-quantity-input');
@@ -160,7 +160,6 @@ function atualizarResumoCheckout() {
    4. LÓGICA DE CHECKOUT MULTI-PRODUTO E PAGAMENTO (CONEXÃO MYSQL)
    ========================================================================== */
 
-// --- FUNÇÃO RECUPERADA (ADICIONADA DE VOLTA) ---
 function alternarCamposPagamento() {
     const metodoInput = document.querySelector('input[name="payment-method"]:checked');
     if (!metodoInput) return;
@@ -244,7 +243,7 @@ async function processarCheckout(event) {
             throw new Error(mensagemErro);
         }
 
-        // 3. Sucesso Absoluto
+        // 3. Sucesso Compra
         alert(`🎉 Sucesso! Pagamento aprovado via ${metodoPagamento.toUpperCase()}. O teu material estaminal está garantido.`);
         
         carrinho = [];
@@ -262,7 +261,7 @@ async function processarCheckout(event) {
         });
 
         atualizarResumoCheckout();
-        alternarCamposPagamento(); // <--- Agora já vai funcionar sem crashar!
+        alternarCamposPagamento();
 
     } catch (erro) {
         console.error("Erro capturado no checkout:", erro);

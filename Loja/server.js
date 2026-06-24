@@ -336,11 +336,11 @@ app.delete('/api/newsletter/:id', async (req, res) => {
 });
 
 /* ==========================================================================
-   ROTAS RECURSO: ENCOMENDAS (CORRIGIDO)
+   ROTAS RECURSO: ENCOMENDAS
    ========================================================================== */
 
 // ==========================================================================
-// 1. ROTA ANTIGA (Mantida para compatibilidade e compras individuais)
+// 1. ROTA I (Mantida para compatibilidade e compras individuais)
 // ==========================================================================
 app.post('/api/encomendas', async (req, res) => {
     const { cliente_id, produto_id, quantity, morada, codigo_postal, localidade, pais } = req.body;
@@ -368,7 +368,7 @@ app.post('/api/encomendas', async (req, res) => {
 });
 
 // ==========================================================================
-// 2. NOVA ROTA MULTI-PRODUTO CORRIGIDA
+// 2. NOVA ROTA MULTI-PRODUTO
 // ==========================================================================
 app.post('/api/encomendas/multiplas', async (req, res) => {
     const { cliente_id, itens, morada, codigo_postal, localidade, pais } = req.body;
